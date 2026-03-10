@@ -35,7 +35,7 @@
 以下提供通用範例，請依實際專案調整：
 
 ```bash
-git clone https://github.com/<your-org>/3D_NETWORK_INFRA_TOPOLOGY.git
+git clone https://github.com/dennislee928/3D_NETWORK_INFRA_TOPOLOGY.git
 cd 3D_NETWORK_INFRA_TOPOLOGY
 
 # 例如：前端
