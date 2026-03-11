@@ -14,6 +14,8 @@ export interface ServiceHealth {
   errorRate?: number;
   lastDeploy?: string;
   region?: string;
+  incidentCount?: number;
+  commandCount?: number;
 }
 
 export interface ServicePosition {
@@ -46,4 +48,3 @@ export interface TopologyResponse {
   nodes: ServiceNode[];
   links: ServiceLink[];
 }
-

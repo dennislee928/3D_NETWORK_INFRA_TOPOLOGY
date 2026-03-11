@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getTopologyServices } from "../lib/api";
 import type { ServiceLink, ServiceNode, TopologyResponse } from "../types/topology";
 
 interface TopologyState {
@@ -8,7 +9,7 @@ interface TopologyState {
   error: string | null;
 }
 
-const MOCK_TOPOLOGY: TopologyResponse = {
+const FALLBACK_TOPOLOGY: TopologyResponse = {
   nodes: [
     {
       id: "edge-gateway",
@@ -16,7 +17,7 @@ const MOCK_TOPOLOGY: TopologyResponse = {
       type: "gateway",
       layer: 1,
       status: "healthy",
-      position: { x: -6, y: 0, z: 0 }
+      position: { x: -10, y: 0, z: 0 }
     },
     {
       id: "ingest-gateway",
@@ -24,16 +25,41 @@ const MOCK_TOPOLOGY: TopologyResponse = {
       type: "gateway",
       layer: 1,
       status: "healthy",
-      position: { x: -2, y: 0, z: 0 }
+      position: { x: -6, y: 0, z: -2 }
+    },
+    {
+      id: "broker",
+      name: "Message Broker",
+      type: "queue",
+      layer: 1,
+      status: "healthy",
+      position: { x: -2, y: 0, z: 2 }
     },
     {
       id: "axiom",
       name: "Axiom Rule Engine",
       type: "rule-engine",
       layer: 2,
+      status: "degraded",
+      riskScore: 0.62,
+      position: { x: 0, y: 4, z: 0 },
+      health: { latencyMs: 42, errorRate: 0.04, region: "core" }
+    },
+    {
+      id: "intel-hub",
+      name: "Intel Hub",
+      type: "other",
+      layer: 2,
       status: "healthy",
-      riskScore: 0.2,
-      position: { x: 0, y: 4, z: 0 }
+      position: { x: -6, y: 4, z: 4 }
+    },
+    {
+      id: "profile-manager",
+      name: "Profile Manager",
+      type: "other",
+      layer: 2,
+      status: "healthy",
+      position: { x: 6, y: 4, z: -4 }
     },
     {
       id: "inference-hmm-beth",
@@ -41,8 +67,8 @@ const MOCK_TOPOLOGY: TopologyResponse = {
       type: "inference",
       layer: 3,
       status: "healthy",
-      riskScore: 0.1,
-      position: { x: -5, y: 8, z: 0 }
+      riskScore: 0.19,
+      position: { x: -8, y: 8, z: 0 }
     },
     {
       id: "inference-iforest-kdd99",
@@ -50,16 +76,8 @@ const MOCK_TOPOLOGY: TopologyResponse = {
       type: "inference",
       layer: 3,
       status: "healthy",
-      position: { x: -1, y: 8, z: -3 }
-    },
-    {
-      id: "inference-iforest-creditcard",
-      name: "IForest CreditCard",
-      type: "inference",
-      layer: 3,
-      status: "degraded",
-      riskScore: 0.6,
-      position: { x: 3, y: 8, z: -1 }
+      riskScore: 0.24,
+      position: { x: -3, y: 8, z: -4 }
     },
     {
       id: "inference-lstm-cicids",
@@ -67,7 +85,8 @@ const MOCK_TOPOLOGY: TopologyResponse = {
       type: "inference",
       layer: 3,
       status: "healthy",
-      position: { x: 5, y: 8, z: 2 }
+      riskScore: 0.21,
+      position: { x: 3, y: 8, z: 4 }
     },
     {
       id: "inference-autoencoder-unsw",
@@ -75,39 +94,20 @@ const MOCK_TOPOLOGY: TopologyResponse = {
       type: "inference",
       layer: 3,
       status: "healthy",
-      position: { x: 1, y: 8, z: 4 }
-    },
-    {
-      id: "supabase",
-      name: "Supabase (Postgres)",
-      type: "db",
-      layer: 0,
-      status: "healthy",
-      position: { x: -4, y: -3, z: -2 }
-    },
-    {
-      id: "mongodb",
-      name: "MongoDB (Models)",
-      type: "db",
-      layer: 0,
-      status: "healthy",
-      position: { x: 4, y: -3, z: -2 }
+      riskScore: 0.18,
+      position: { x: 8, y: 8, z: 0 }
     }
   ],
   links: [
-    { id: "edge->ingest", from: "edge-gateway", to: "ingest-gateway", kind: "http" },
-    { id: "ingest->axiom", from: "ingest-gateway", to: "axiom", kind: "http" },
-    { id: "axiom->hmm", from: "axiom", to: "inference-hmm-beth", kind: "inference" },
-    { id: "axiom->if-kdd", from: "axiom", to: "inference-iforest-kdd99", kind: "inference" },
-    { id: "axiom->if-cc", from: "axiom", to: "inference-iforest-creditcard", kind: "inference" },
-    { id: "axiom->lstm", from: "axiom", to: "inference-lstm-cicids", kind: "inference" },
-    { id: "axiom->ae", from: "axiom", to: "inference-autoencoder-unsw", kind: "inference" },
-    { id: "tp->supabase", from: "supabase", to: "axiom", kind: "db" },
-    { id: "inf->mongo1", from: "inference-hmm-beth", to: "mongodb", kind: "db" },
-    { id: "inf->mongo2", from: "inference-iforest-kdd99", to: "mongodb", kind: "db" },
-    { id: "inf->mongo3", from: "inference-iforest-creditcard", to: "mongodb", kind: "db" },
-    { id: "inf->mongo4", from: "inference-lstm-cicids", to: "mongodb", kind: "db" },
-    { id: "inf->mongo5", from: "inference-autoencoder-unsw", to: "mongodb", kind: "db" }
+    { id: "edge-ingest", from: "edge-gateway", to: "ingest-gateway", kind: "http" },
+    { id: "ingest-broker", from: "ingest-gateway", to: "broker", kind: "amqp" },
+    { id: "broker-axiom", from: "broker", to: "axiom", kind: "stream" },
+    { id: "axiom-intel", from: "axiom", to: "intel-hub", kind: "http" },
+    { id: "axiom-profile", from: "axiom", to: "profile-manager", kind: "http" },
+    { id: "axiom-hmm", from: "axiom", to: "inference-hmm-beth", kind: "inference" },
+    { id: "axiom-iforest", from: "axiom", to: "inference-iforest-kdd99", kind: "inference" },
+    { id: "axiom-lstm", from: "axiom", to: "inference-lstm-cicids", kind: "inference" },
+    { id: "axiom-ae", from: "axiom", to: "inference-autoencoder-unsw", kind: "inference" }
   ]
 };
 
@@ -121,29 +121,19 @@ export function useTopologyData(): TopologyState {
 
   useEffect(() => {
     const controller = new AbortController();
-    const baseUrl = import.meta.env.VITE_TOPOLOGY_API_URL?.trim();
 
     async function load() {
-      if (!baseUrl) {
-        // 無後端 API 時使用 mock 資料
-        setState({ nodes: MOCK_TOPOLOGY.nodes, links: MOCK_TOPOLOGY.links, loading: false, error: null });
-        return;
-      }
       try {
         setState(prev => ({ ...prev, loading: true, error: null }));
-        const resp = await fetch(`${baseUrl}/api/topology/services`, { signal: controller.signal });
-        if (!resp.ok) {
-          throw new Error(`HTTP ${resp.status}`);
-        }
-        const json = (await resp.json()) as TopologyResponse;
-        setState({ nodes: json.nodes ?? [], links: json.links ?? [], loading: false, error: null });
-      } catch (err: unknown) {
+        const topology = await getTopologyServices();
         if (controller.signal.aborted) return;
-        const message = err instanceof Error ? err.message : String(err);
-        // 若呼叫失敗，退回 mock，但記錄錯誤
+        setState({ nodes: topology.nodes, links: topology.links, loading: false, error: null });
+      } catch (error) {
+        if (controller.signal.aborted) return;
+        const message = error instanceof Error ? error.message : String(error);
         setState({
-          nodes: MOCK_TOPOLOGY.nodes,
-          links: MOCK_TOPOLOGY.links,
+          nodes: FALLBACK_TOPOLOGY.nodes,
+          links: FALLBACK_TOPOLOGY.links,
           loading: false,
           error: message
         });
@@ -156,4 +146,3 @@ export function useTopologyData(): TopologyState {
 
   return state;
 }
-

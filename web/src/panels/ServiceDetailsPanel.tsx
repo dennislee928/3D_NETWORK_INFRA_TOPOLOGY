@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import { useSelectionStore } from "../state/useSelectionStore";
-import { useTopologyData } from "../hooks/useTopologyData";
+import type { ServiceNode } from "../types/topology";
 
-export function ServiceDetailsPanel() {
+interface Props {
+  nodes: ServiceNode[];
+}
+
+export function ServiceDetailsPanel({ nodes }: Props) {
   const { selectedId } = useSelectionStore();
-  const { nodes } = useTopologyData();
 
   const node = useMemo(() => nodes.find(n => n.id === selectedId) ?? null, [nodes, selectedId]);
 
@@ -75,6 +78,18 @@ export function ServiceDetailsPanel() {
                   <td>{node.health.region}</td>
                 </tr>
               )}
+              {typeof node.health.incidentCount === "number" && (
+                <tr>
+                  <td style={{ opacity: 0.7 }}>Open incidents</td>
+                  <td>{node.health.incidentCount}</td>
+                </tr>
+              )}
+              {typeof node.health.commandCount === "number" && (
+                <tr>
+                  <td style={{ opacity: 0.7 }}>Pending commands</td>
+                  <td>{node.health.commandCount}</td>
+                </tr>
+              )}
               {node.health.lastDeploy && (
                 <tr>
                   <td style={{ opacity: 0.7 }}>最近部署</td>
@@ -107,4 +122,3 @@ export function ServiceDetailsPanel() {
     </div>
   );
 }
-

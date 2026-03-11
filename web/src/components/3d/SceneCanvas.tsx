@@ -2,8 +2,16 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import { Suspense } from "react";
 import { ServiceGraph } from "./ServiceGraph";
+import type { ServiceLink, ServiceNode } from "../../types/topology";
 
-export function SceneCanvas() {
+interface Props {
+  nodes: ServiceNode[];
+  links: ServiceLink[];
+  loading: boolean;
+  error: string | null;
+}
+
+export function SceneCanvas({ nodes, links, loading, error }: Props) {
   return (
     <Canvas
       camera={{ position: [0, 10, 26], fov: 50 }}
@@ -21,11 +29,10 @@ export function SceneCanvas() {
           </Html>
         }
       >
-        <ServiceGraph />
+        <ServiceGraph nodes={nodes} links={links} loading={loading} error={error} />
       </Suspense>
 
       <OrbitControls makeDefault enablePan enableZoom />
     </Canvas>
   );
 }
-

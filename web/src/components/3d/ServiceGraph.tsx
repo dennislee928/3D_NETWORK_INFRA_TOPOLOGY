@@ -1,12 +1,18 @@
 import { Html } from "@react-three/drei";
 import { useMemo } from "react";
-import { useTopologyData } from "../../hooks/useTopologyData";
 import type { ServiceNode as ServiceNodeType } from "../../types/topology";
+import type { ServiceLink as ServiceLinkType } from "../../types/topology";
 import { ServiceNode } from "./ServiceNode";
 import { ServiceLink } from "./ServiceLink";
 
-export function ServiceGraph() {
-  const { nodes, links, loading, error } = useTopologyData();
+interface Props {
+  nodes: ServiceNodeType[];
+  links: ServiceLinkType[];
+  loading: boolean;
+  error: string | null;
+}
+
+export function ServiceGraph({ nodes, links, loading, error }: Props) {
 
   const positionedNodes: ServiceNodeType[] = useMemo(() => {
     if (!nodes.length) return [];
@@ -91,4 +97,3 @@ export function ServiceGraph() {
     </>
   );
 }
-
