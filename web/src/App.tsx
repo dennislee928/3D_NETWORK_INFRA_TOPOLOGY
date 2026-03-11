@@ -1,9 +1,14 @@
-import { SceneCanvas } from "./components/3d/SceneCanvas";
+import { lazy, Suspense } from "react";
 import { SectionPanel } from "./components/dashboard/SectionPanel";
 import { SummaryCard } from "./components/dashboard/SummaryCard";
 import { useDashboardData } from "./hooks/useDashboardData";
 import { useTopologyData } from "./hooks/useTopologyData";
 import { ServiceDetailsPanel } from "./panels/ServiceDetailsPanel";
+
+const SceneCanvas = lazy(async () => {
+  const mod = await import("./components/3d/SceneCanvas");
+  return { default: mod.SceneCanvas };
+});
 
 function formatCompact(value: number | undefined) {
   if (typeof value !== "number" || Number.isNaN(value)) return "--";
@@ -144,12 +149,14 @@ export function App() {
           >
             <div className="topology-layout">
               <div className="topology-stage">
-                <SceneCanvas
-                  nodes={topology.nodes}
-                  links={topology.links}
-                  loading={topology.loading}
-                  error={topology.error}
-                />
+                <Suspense fallback={<div className="topology-loading">Loading topology workspace...</div>}>
+                  <SceneCanvas
+                    nodes={topology.nodes}
+                    links={topology.links}
+                    loading={topology.loading}
+                    error={topology.error}
+                  />
+                </Suspense>
               </div>
               <div className="topology-sidebar">
                 <ServiceDetailsPanel nodes={topology.nodes} />

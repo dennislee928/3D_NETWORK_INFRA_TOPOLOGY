@@ -3,9 +3,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { App } from "./App";
 
-vi.mock("./components/3d/SceneCanvas", () => ({
-  SceneCanvas: () => <div data-testid="scene-canvas">Topology Canvas</div>
-}));
+vi.mock("./components/3d/SceneCanvas", async () => {
+  await new Promise(resolve => setTimeout(resolve, 25));
+  return {
+    SceneCanvas: () => <div data-testid="scene-canvas">Topology Canvas</div>
+  };
+});
 
 const originalFetch = global.fetch;
 
@@ -86,10 +89,11 @@ describe("App", () => {
   it("renders live dashboard summary and recent incident data", async () => {
     render(<App />);
 
+    expect(screen.getByText("Loading topology workspace...")).toBeInTheDocument();
     expect(await screen.findByText("Open Incidents")).toBeInTheDocument();
     expect(screen.getByText("4")).toBeInTheDocument();
     expect(screen.getByText("Suspicious credential replay")).toBeInTheDocument();
-    expect(screen.getByTestId("scene-canvas")).toBeInTheDocument();
+    expect(await screen.findByTestId("scene-canvas")).toBeInTheDocument();
   });
 
   it("shows a degraded-data warning when overview loading fails", async () => {

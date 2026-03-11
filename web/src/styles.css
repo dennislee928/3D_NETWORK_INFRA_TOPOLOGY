@@ -313,6 +313,20 @@ textarea {
   padding: 18px;
 }
 
+.topology-loading {
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  padding: 24px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font: 500 12px/1.4 "IBM Plex Mono", monospace;
+  background:
+    radial-gradient(circle at center, rgba(125, 199, 255, 0.08), transparent 45%),
+    rgba(2, 10, 16, 0.78);
+}
+
 .metric-bars {
   display: grid;
   gap: 14px;
