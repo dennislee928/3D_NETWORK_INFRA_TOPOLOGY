@@ -52,7 +52,27 @@ export function App() {
           <strong>{formatTimestamp(dashboard.data?.generated_at)}</strong>
         </div>
       </header>
-
+      <SectionPanel
+            title="Threat Topology"
+            subtitle="Live service graph backed by the new topology endpoint."
+            aside={<span className="panel-pill">{topology.nodes.length} services</span>}
+          >
+            <div className="topology-layout">
+              <div className="topology-stage">
+                <Suspense fallback={<div className="topology-loading">Loading topology workspace...</div>}>
+                  <SceneCanvas
+                    nodes={topology.nodes}
+                    links={topology.links}
+                    loading={topology.loading}
+                    error={topology.error}
+                  />
+                </Suspense>
+              </div>
+              <div className="topology-sidebar">
+                <ServiceDetailsPanel nodes={topology.nodes} />
+              </div>
+            </div>
+          </SectionPanel>
       {warnings.length > 0 ? (
         <div className="status-banner" role="status">
           {warnings.map(warning => (
@@ -142,27 +162,7 @@ export function App() {
             )}
           </SectionPanel>
 
-          <SectionPanel
-            title="Threat Topology"
-            subtitle="Live service graph backed by the new topology endpoint."
-            aside={<span className="panel-pill">{topology.nodes.length} services</span>}
-          >
-            <div className="topology-layout">
-              <div className="topology-stage">
-                <Suspense fallback={<div className="topology-loading">Loading topology workspace...</div>}>
-                  <SceneCanvas
-                    nodes={topology.nodes}
-                    links={topology.links}
-                    loading={topology.loading}
-                    error={topology.error}
-                  />
-                </Suspense>
-              </div>
-              <div className="topology-sidebar">
-                <ServiceDetailsPanel nodes={topology.nodes} />
-              </div>
-            </div>
-          </SectionPanel>
+      
         </div>
 
         <aside className="dashboard-side">
