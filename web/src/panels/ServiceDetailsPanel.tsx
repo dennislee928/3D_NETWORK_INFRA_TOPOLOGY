@@ -35,6 +35,12 @@ export function ServiceDetailsPanel({ nodes }: Props) {
               <td style={{ opacity: 0.7 }}>類型</td>
               <td>{node.type}</td>
             </tr>
+            {node.realm && (
+              <tr>
+                <td style={{ opacity: 0.7 }}>領域 (Realm)</td>
+                <td>{node.realm}</td>
+              </tr>
+            )}
             <tr>
               <td style={{ opacity: 0.7 }}>Layer</td>
               <td>{node.layer}</td>
@@ -49,13 +55,19 @@ export function ServiceDetailsPanel({ nodes }: Props) {
                 <td>{(node.riskScore * 100).toFixed(0)}%</td>
               </tr>
             )}
+            {node.metadata && Object.entries(node.metadata).map(([key, value]) => (
+              <tr key={key}>
+                <td style={{ opacity: 0.7 }}>{key}</td>
+                <td>{String(value)}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </section>
 
       <section style={{ marginBottom: 12 }}>
         <h3 style={{ fontSize: 12, textTransform: "uppercase", opacity: 0.7, margin: "0 0 4px" }}>
-          健康狀態
+          健康狀態 / 負載
         </h3>
         {node.health ? (
           <table style={{ fontSize: 13, width: "100%", borderSpacing: 0 }}>
@@ -70,6 +82,24 @@ export function ServiceDetailsPanel({ nodes }: Props) {
                 <tr>
                   <td style={{ opacity: 0.7 }}>錯誤率</td>
                   <td>{(node.health.errorRate * 100).toFixed(2)}%</td>
+                </tr>
+              )}
+              {typeof node.health.cpuUsage === "number" && (
+                <tr>
+                  <td style={{ opacity: 0.7 }}>CPU 負載</td>
+                  <td>{(node.health.cpuUsage * 100).toFixed(1)}%</td>
+                </tr>
+              )}
+              {typeof node.health.memoryUsage === "number" && (
+                <tr>
+                  <td style={{ opacity: 0.7 }}>記憶體</td>
+                  <td>{(node.health.memoryUsage * 100).toFixed(1)}%</td>
+                </tr>
+              )}
+              {typeof node.health.bandwidthUsage === "number" && (
+                <tr>
+                  <td style={{ opacity: 0.7 }}>頻寬佔用</td>
+                  <td>{(node.health.bandwidthUsage * 100).toFixed(1)}%</td>
                 </tr>
               )}
               {node.health.region && (
@@ -105,18 +135,17 @@ export function ServiceDetailsPanel({ nodes }: Props) {
 
       <section>
         <h3 style={{ fontSize: 12, textTransform: "uppercase", opacity: 0.7, margin: "0 0 4px" }}>
-          位置 / Layer 視覺化
+          分層視覺化 (Layer & Realm)
         </h3>
         <p style={{ opacity: 0.8, fontSize: 13 }}>
-          3D 圖中此節點位於 Layer {node.layer}，代表{" "}
-          {node.layer === 1
-            ? "邊界 / Gateway 層"
-            : node.layer === 2
-            ? "規則引擎 / 決策層"
-            : node.layer === 3
-            ? "Inference / AI 模型層"
-            : "資料 / 基礎設施層"}
-          。
+          此節點屬於 <strong>{node.realm?.toUpperCase() || "SERVICE"}</strong> 領域。
+          在 3D 場景中，不同領域分布在不同高度：
+          <br />
+          - Service: 頂層 (Y &gt; 0)
+          <br />
+          - Virtual: 中層 (Y ≈ 0)
+          <br />
+          - Physical: 底層 (Y &lt; 0)
         </p>
       </section>
     </div>

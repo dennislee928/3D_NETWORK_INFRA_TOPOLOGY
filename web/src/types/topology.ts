@@ -7,7 +7,12 @@ export type ServiceType =
   | "db"
   | "queue"
   | "agent"
+  | "switch"
+  | "host"
+  | "controller"
   | "other";
+
+export type TopologyRealm = "physical" | "virtual" | "service";
 
 export interface ServiceHealth {
   latencyMs?: number;
@@ -16,6 +21,9 @@ export interface ServiceHealth {
   region?: string;
   incidentCount?: number;
   commandCount?: number;
+  cpuUsage?: number;
+  memoryUsage?: number;
+  bandwidthUsage?: number;
 }
 
 export interface ServicePosition {
@@ -29,19 +37,24 @@ export interface ServiceNode {
   name: string;
   type: ServiceType;
   layer: number;
+  realm?: TopologyRealm;
   status: ServiceStatus;
   health?: ServiceHealth;
   riskScore?: number;
   position?: ServicePosition;
+  metadata?: Record<string, string | number | boolean>;
 }
 
-export type LinkKind = "http" | "amqp" | "mqtt" | "inference" | "db" | "stream";
+export type LinkKind = "http" | "amqp" | "mqtt" | "inference" | "db" | "stream" | "physical" | "logical";
 
 export interface ServiceLink {
   id: string;
   from: string;
   to: string;
   kind: LinkKind;
+  realm?: TopologyRealm;
+  bandwidth?: number;
+  utilization?: number;
 }
 
 export interface TopologyResponse {

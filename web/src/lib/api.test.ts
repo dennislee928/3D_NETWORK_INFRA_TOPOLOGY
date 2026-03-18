@@ -19,7 +19,10 @@ describe("dashboard api client", () => {
 
     await getDashboardOverview();
 
-    expect(fetchMock).toHaveBeenCalledWith("/api/v1/dashboard/overview", expect.any(Object));
+    expect(fetchMock).toHaveBeenCalledWith(
+      "https://axiom-rule-siem-engine-0z43.onrender.com/api/v1/dashboard/overview",
+      expect.any(Object)
+    );
   });
 
   it("throws a useful error when topology fetch fails", async () => {

@@ -44,17 +44,23 @@ export function ServiceLink({ link, fromNode, toNode }: Props) {
         return "#fb7185";
       case "mqtt":
         return "#34d399";
+      case "physical":
+        return "#94a3b8";
+      case "logical":
+        return "#38bdf8";
       default:
         return "#6b7280";
     }
   }, [link.kind]);
+
+  const isDashed = link.kind === "stream" || link.kind === "logical";
 
   return (
     <Line
       points={points}
       color={color}
       lineWidth={isHighlighted ? 3 : 1.5}
-      dashed={link.kind === "stream"}
+      dashed={isDashed}
       dashSize={0.4}
       gapSize={0.3}
       transparent

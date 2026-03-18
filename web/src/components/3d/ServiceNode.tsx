@@ -61,6 +61,9 @@ export function ServiceNode({ node }: Props) {
         {node.type === "db" && <cylinderGeometry args={[0.7, 0.7, 0.6, 20]} />}
         {node.type === "queue" && <torusGeometry args={[0.7, 0.2, 12, 32]} />}
         {node.type === "agent" && <octahedronGeometry args={[radius, 0]} />}
+        {node.type === "switch" && <boxGeometry args={[1.6, 0.3, 1.0]} />}
+        {node.type === "host" && <boxGeometry args={[0.6, 1.2, 0.6]} />}
+        {node.type === "controller" && <icosahedronGeometry args={[1.0, 0]} />}
         {node.type === "other" && <sphereGeometry args={[radius, 16, 16]} />}
         <meshStandardMaterial
           color={color}
