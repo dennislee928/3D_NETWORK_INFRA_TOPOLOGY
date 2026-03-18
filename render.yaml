@@ -1,32 +1,42 @@
 services:
-  # 1. Rust SDN Adapter 後端
+  # Render can host the adapter and frontend as Docker-based services.
+  # The local Mininet/OVS topology lab is intentionally omitted here because
+  # it requires privileged containers, host module access, and bind mounts.
+
   - type: web
     name: sdn-adapter-rust
-    runtime: rust
+    runtime: docker
     plan: free
     region: singapore
-    buildCommand: cd backend && cargo build --release
-    startCommand: cd backend && ./target/release/backend
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - backend/**
+        - render.yaml
     envVars:
       - key: PORT
-        value: 4000
-      - key: ODL_URL
-        value: http://localhost:8181 # 預設 mock 模式
+        value: "10000"
       - key: RUST_LOG
         value: info
 
-  # 2. 前端 3D 拓樸展示 (Static Site)
   - type: web
     name: topology-frontend-3d
-    runtime: node
+    runtime: docker
     plan: free
     region: singapore
-    buildCommand: cd web && npm install && npm run build
-    staticPublishPath: web/dist
+    dockerfilePath: ./web/Dockerfile
+    dockerContext: ./web
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - web/**
+        - render.yaml
     envVars:
-      # 自動抓取上面後端的服務連結 (此時 VITE 會讀取到對應的 URL)
-      - key: VITE_SDN_ADAPTER_URL
+      - key: SDN_ADAPTER_HOSTPORT
         fromService:
           type: web
           name: sdn-adapter-rust
-          property: url
+          property: hostport

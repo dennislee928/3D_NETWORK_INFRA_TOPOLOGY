@@ -95,9 +95,11 @@ npm run dev
 1. 將本專案推送到您的 GitHub。z
 2. 在 Render 控制台選擇 **"Blueprints"**。
 3. 連結此 Repository，Render 會自動讀取 `render.yaml` 並：
-   - 在 **Singapore** 區域建立 Rust Web Service (後端)。
-   - 在 **Singapore** 區域建立 Static Site (前端)。
-   - 自動將後端網址注入給前端。
+   - 在 **Singapore** 區域建立 Docker Web Service (Rust Adapter)。
+   - 在 **Singapore** 區域建立 Docker Web Service (前端 Nginx)。
+   - 讓前端透過 Render 私有網路代理到後端 `/api/...`。
+
+> **注意**：`render.yaml` 只部署前端與 Adapter。`ryu` 與 `mininet` 仍屬於本地實驗環境，因為它們依賴 privileged networking、Open vSwitch 與 host module access，不適合直接用目前的 Render Blueprint 方式部署。
 
 ---
 

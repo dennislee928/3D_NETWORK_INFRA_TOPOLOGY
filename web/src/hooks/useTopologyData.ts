@@ -167,22 +167,26 @@ export function useTopologyData(): TopologyState {
         setState(prev => ({ ...prev, loading: true, error: null, usingMockData: false }));
         agentLog("A", "web/src/hooks/useTopologyData.ts:load", "load_start", {});
         
-        // Fetch both Service and SDN topologies in parallel
-        const [serviceTopology, sdnTopology] = await Promise.all([
-          getTopologyServices(),
-          getSDNTopology()
-        ]);
+        // Start both fetches, but do NOT let a slow/unreachable Service topology block rendering SDN.
+        const sdnPromise = getSDNTopology();
+        const servicePromise = getTopologyServices()
+          .then(v => ({ ok: true as const, value: v }))
+          .catch(error => ({
+            ok: false as const,
+            error: error instanceof Error ? error.message : String(error)
+          }));
 
+        const sdnTopology = await sdnPromise;
         if (controller.signal.aborted) return;
-        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "load_fetched", {
-          serviceNodes: serviceTopology?.nodes?.length ?? null,
-          serviceLinks: serviceTopology?.links?.length ?? null,
+
+        agentLog("B", "web/src/hooks/useTopologyData.ts:load", "sdn_ready", {
           sdnNodes: sdnTopology?.nodes?.length ?? null,
           sdnLinks: sdnTopology?.links?.length ?? null
         });
 
-        const baseNodes = serviceTopology.nodes?.length ? serviceTopology.nodes : FALLBACK_TOPOLOGY.nodes;
-        const baseLinks = serviceTopology.links?.length ? serviceTopology.links : FALLBACK_TOPOLOGY.links;
+        // Render immediately with SDN + fallback services so the canvas is not blank.
+        const baseNodes = FALLBACK_TOPOLOGY.nodes;
+        const baseLinks = FALLBACK_TOPOLOGY.links;
 
         // Apply Y-axis offsets and set default realm
         const processedServiceNodes = baseNodes.map(node => ({
@@ -203,8 +207,8 @@ export function useTopologyData(): TopologyState {
         }));
 
         // Combine all nodes and links
-        const allNodes = [...processedSdnNodes, ...processedServiceNodes];
-        const allLinks = [
+        const initialNodes = [...processedSdnNodes, ...processedServiceNodes];
+        const initialLinks = [
           ...sdnTopology.links,
           ...baseLinks.map(l => ({ ...l, realm: l.realm || ("service" as TopologyRealm) })),
           // Cross-layer link: connect service gateway to virtual switch
@@ -212,9 +216,9 @@ export function useTopologyData(): TopologyState {
         ];
 
         agentLog("C", "web/src/hooks/useTopologyData.ts:load", "load_processed", {
-          allNodes: allNodes.length,
-          allLinks: allLinks.length,
-          realmCounts: allNodes.reduce(
+          allNodes: initialNodes.length,
+          allLinks: initialLinks.length,
+          realmCounts: initialNodes.reduce(
             (acc, n) => {
               const r = (((n as any)?.realm as string | undefined) || "service") as string;
               acc[r] = (acc[r] ?? 0) + 1;
@@ -225,8 +229,58 @@ export function useTopologyData(): TopologyState {
         });
 
         setState({
-          nodes: allNodes,
-          links: allLinks,
+          nodes: initialNodes,
+          links: initialLinks,
+          loading: false,
+          error: null,
+          usingMockData: true
+        });
+
+        // When service topology eventually resolves, merge it in (if any).
+        const serviceResult = await servicePromise;
+        if (controller.signal.aborted) return;
+
+        if (!serviceResult.ok) {
+          agentLog("A", "web/src/hooks/useTopologyData.ts:load", "service_failed_non_blocking", {
+            error: serviceResult.error
+          });
+          return;
+        }
+
+        const serviceTopology = serviceResult.value;
+        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "service_ready", {
+          serviceNodes: serviceTopology?.nodes?.length ?? null,
+          serviceLinks: serviceTopology?.links?.length ?? null
+        });
+
+        const serviceNodes =
+          serviceTopology.nodes?.length ? serviceTopology.nodes : FALLBACK_TOPOLOGY.nodes;
+        const serviceLinks =
+          serviceTopology.links?.length ? serviceTopology.links : FALLBACK_TOPOLOGY.links;
+
+        const processedServiceNodes2 = serviceNodes.map(node => ({
+          ...node,
+          realm: "service" as TopologyRealm,
+          position: node.position
+            ? { ...node.position, y: node.position.y + REALM_Y_OFFSET["service"] }
+            : undefined
+        }));
+
+        const mergedNodes = [...processedSdnNodes, ...processedServiceNodes2];
+        const mergedLinks = [
+          ...sdnTopology.links,
+          ...serviceLinks.map(l => ({ ...l, realm: l.realm || ("service" as TopologyRealm) })),
+          { id: "cross-layer-1", from: "edge-gateway", to: "ovs-virt-01", kind: "logical", realm: "virtual" } as ServiceLink
+        ];
+
+        agentLog("C", "web/src/hooks/useTopologyData.ts:load", "merged_ready", {
+          allNodes: mergedNodes.length,
+          allLinks: mergedLinks.length
+        });
+
+        setState({
+          nodes: mergedNodes,
+          links: mergedLinks,
           loading: false,
           error: null,
           usingMockData: !serviceTopology.nodes?.length

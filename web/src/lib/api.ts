@@ -88,14 +88,16 @@ export function getDashboardOverview() {
 }
 
 export async function getSDNTopology(): Promise<TopologyResponse> {
-  const adapterUrl = (import.meta as any).env?.VITE_SDN_ADAPTER_URL || "http://localhost:4000";
+  const configuredAdapterUrl = (import.meta as any).env?.VITE_SDN_ADAPTER_URL as string | undefined;
+  const adapterUrl = configuredAdapterUrl ?? ((import.meta as any).env?.DEV ? "http://localhost:4000" : "");
+  const topologyUrl = adapterUrl ? `${adapterUrl}/api/v1/topology/sdn` : "/api/v1/topology/sdn";
   
   try {
     agentLog("B", "web/src/lib/api.ts:getSDNTopology", "request_start", {
       adapterUrl,
-      url: `${adapterUrl}/api/v1/topology/sdn`
+      url: topologyUrl
     });
-    const response = await fetch(`${adapterUrl}/api/v1/topology/sdn`);
+    const response = await fetch(topologyUrl);
     if (response.ok) {
       const json = await response.json();
       agentLog("B", "web/src/lib/api.ts:getSDNTopology", "response_ok", {
