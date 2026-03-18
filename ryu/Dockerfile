@@ -5,8 +5,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
+COPY patch_ryu.py /tmp/patch_ryu.py
+
 RUN python -m pip install --no-cache-dir "setuptools<68" wheel && \
-    python -m pip install --no-cache-dir "ryu==4.34"
+    python -m pip install --no-cache-dir "ryu==4.34" && \
+    python /tmp/patch_ryu.py && \
+    rm /tmp/patch_ryu.py
 
 EXPOSE 8080 6633
 
