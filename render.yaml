@@ -40,6 +40,11 @@ services:
           type: web
           name: sdn-adapter-rust
           property: url
+      - key: SDN_ADAPTER_HOSTPORT
+        fromService:
+          type: web
+          name: sdn-adapter-rust
+          property: hostport
 
   - type: web
     name: ryu-controller
