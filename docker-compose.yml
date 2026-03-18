@@ -1,7 +1,10 @@
 services:
   opendaylight:
     image: opendaylight/odl:latest
+    platform: linux/amd64
     container_name: odl_controller
+    tty: true
+    stdin_open: true
     ports:
       - "8181:8181" # RESTCONF
       - "6633:6633" # OpenFlow
