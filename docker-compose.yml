@@ -1,14 +1,36 @@
 services:
   opendaylight:
     image: opendaylight/odl:latest
+    container_name: odl_controller
     ports:
       - "8181:8181" # RESTCONF
       - "6633:6633" # OpenFlow
+      - "6653:6653" # OpenFlow (Newer ODL)
     environment:
-      - ODL_INSTALL_FEATURES=odl-restconf,odl-l2switch-switch,odl-mdsal-apidocs,odl-dlux-core
+      # ODL 需要安裝這些 feature 才能支援 OpenFlow 與 RESTCONF
+      - ODL_INSTALL_FEATURES=odl-restconf,odl-openflowplugin-all,odl-mdsal-apidocs,odl-dlux-core
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8181/restconf/operational/network-topology:network-topology"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  mininet:
+    build:
+      context: ./mininet
+    container_name: mininet_network
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro # 共享內核模組 (Mininet 需要)
+    stdin_open: true
+    tty: true
+    depends_on:
+      opendaylight:
+        condition: service_healthy
 
   sdn-adapter:
     build: ./backend
+    container_name: sdn_adapter
     ports:
       - "4000:4000"
     environment:
@@ -20,6 +42,7 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
+    container_name: topology_frontend
     ports:
       - "5173:5173"
     environment:
