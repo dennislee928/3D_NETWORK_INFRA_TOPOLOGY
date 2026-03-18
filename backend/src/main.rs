@@ -95,12 +95,10 @@ fn transform_odl(odl_data: &OdlNetworkTopology) -> TopologyResponse {
     let mut links = Vec::new();
 
     if let Some(topo) = odl_data.topology.get(0) {
-        // Transform Nodes
         if let Some(odl_nodes) = &topo.node {
             for (index, node) in odl_nodes.iter().enumerate() {
                 let is_switch = node.node_id.starts_with("openflow:");
                 let angle = index as f32;
-                
                 let mut metadata = HashMap::new();
                 if let Some(tps) = &node.termination_point {
                     metadata.insert("ports".to_string(), serde_json::json!(tps.len()));
@@ -115,20 +113,19 @@ fn transform_odl(odl_data: &OdlNetworkTopology) -> TopologyResponse {
                     },
                     node_type: if is_switch { "switch".to_string() } else { "host".to_string() },
                     realm: "physical".to_string(),
-                    layer: if is_switch { 1 } else { 2 },
+                    layer: 1,
                     status: "healthy".to_string(),
                     position: ServicePosition {
                         x: angle.cos() * 10.0,
                         y: -10.0,
                         z: angle.sin() * 10.0,
                     },
-                    risk_score: 0.1, // Placeholder
+                    risk_score: 0.1,
                     metadata,
                 });
             }
         }
 
-        // Transform Links
         if let Some(odl_links) = &topo.link {
             for link in odl_links {
                 links.push(ServiceLink {
@@ -153,7 +150,24 @@ async fn get_sdn_topology() -> Json<TopologyResponse> {
     }
 
     let odl_url = std::env::var("ODL_URL").unwrap_or_else(|_| "http://localhost:8181".to_string());
-    // ... 原本的 ODL 邏輯 (略)
+    let client = reqwest::Client::new();
+
+    match client
+        .get(format!("{}/restconf/operational/network-topology:network-topology", odl_url))
+        .basic_auth("admin", Some("admin"))
+        .header("Accept", "application/json")
+        .send()
+        .await
+    {
+        Ok(resp) => {
+            if let Ok(odl_resp) = resp.json::<OdlResponse>().await {
+                return Json(transform_odl(&odl_resp.network_topology));
+            }
+        }
+        Err(_) => {}
+    }
+
+    Json(get_mock_topology())
 }
 
 async fn get_ryu_topology() -> Json<TopologyResponse> {
@@ -163,13 +177,11 @@ async fn get_ryu_topology() -> Json<TopologyResponse> {
     let mut nodes = Vec::new();
     let mut links = Vec::new();
 
-    // 1. Get Switches
     if let Ok(resp) = client.get(format!("{}/stats/switches", ryu_url)).send().await {
         if let Ok(switches) = resp.json::<Vec<u64>>().await {
             for (idx, dpid) in switches.iter().enumerate() {
-                let id = format!("openflow:{}", dpid);
                 nodes.push(ServiceNode {
-                    id: id.clone(),
+                    id: format!("openflow:{}", dpid),
                     name: format!("Switch {}", dpid),
                     node_type: "switch".to_string(),
                     realm: "physical".to_string(),
@@ -183,7 +195,6 @@ async fn get_ryu_topology() -> Json<TopologyResponse> {
         }
     }
 
-    // 2. Get Links (Requires rest_topology app)
     if let Ok(resp) = client.get(format!("{}/v1.0/topology/links", ryu_url)).send().await {
         if let Ok(ryu_links) = resp.json::<Vec<serde_json::Value>>().await {
             for link in ryu_links {
@@ -191,7 +202,7 @@ async fn get_ryu_topology() -> Json<TopologyResponse> {
                 let dst_dpid = link["dst"]["dpid"].as_str().unwrap_or("");
                 links.push(ServiceLink {
                     id: format!("link-{}-{}", src_dpid, dst_dpid),
-                    from: format!("openflow:{}", src_dpid.trim_start_matches('0')), // Ryu dpid often has leading zeros
+                    from: format!("openflow:{}", src_dpid.trim_start_matches('0')),
                     to: format!("openflow:{}", dst_dpid.trim_start_matches('0')),
                     kind: "physical".to_string(),
                     realm: "physical".to_string(),
@@ -209,11 +220,9 @@ async fn get_ryu_topology() -> Json<TopologyResponse> {
 
 fn get_mock_topology() -> TopologyResponse {
     let mut nodes = Vec::new();
-    let mut links = Vec::new();
-
     nodes.push(ServiceNode {
         id: "openflow:1".to_string(),
-        name: "Switch 1".to_string(),
+        name: "Mock Switch 1".to_string(),
         node_type: "switch".to_string(),
         realm: "physical".to_string(),
         layer: 1,
@@ -222,19 +231,13 @@ fn get_mock_topology() -> TopologyResponse {
         risk_score: 0.05,
         metadata: HashMap::new(),
     });
-
-    TopologyResponse { nodes, links }
+    TopologyResponse { nodes, links: Vec::new() }
 }
 
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
-
-    let cors = CorsLayer::new()
-        .allow_origin(Any)
-        .allow_methods(Any)
-        .allow_headers(Any);
-
+    let cors = CorsLayer::new().allow_origin(Any).allow_methods(Any).allow_headers(Any);
     let app = Router::new()
         .route("/", get(|| async { "SDN Adapter is running" }))
         .route("/health", get(|| async { "OK" }))
