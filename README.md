@@ -34,6 +34,7 @@
 docker-compose up -d --build
 ```
 > **注意**：Ryu 初次建置時需要安裝 Python 相依套件，可能需要 1-2 分鐘。您可以透過 `docker logs -f ryu_controller` 查看進度。
+> **注意**：Mininet 容器啟動時會自動初始化 Open vSwitch。若您在 Docker Desktop 上執行，建議先用較小的拓樸驗證流程。
 
 ### B. 進入 Mininet 建立模擬拓樸
 當 Ryu 啟動完成後（`docker ps` 顯示健康狀態），進入 Mininet 容器手動建立網路：
@@ -48,6 +49,11 @@ mn --controller=remote,ip=ryu,port=6633 --topo=single,3
 進入 Mininet CLI 後，執行 `pingall` 確保網路連通：
 ```bash
 mininet> pingall
+```
+
+若要建立樹狀拓樸，先從較小的規模開始，例如：
+```bash
+mn --controller=remote,ip=ryu,port=6633 --topo=tree,depth=3,fanout=3
 ```
 
 ### C. 驗證 3D 視覺化

@@ -12,5 +12,11 @@ RUN apt-get update && apt-get install -y \
     openvswitch-switch \
     && rm -rf /var/lib/apt/lists/*
 
+COPY start-mininet.sh /usr/local/bin/start-mininet.sh
+
+RUN chmod +x /usr/local/bin/start-mininet.sh
+
+ENTRYPOINT ["/usr/local/bin/start-mininet.sh"]
+
 # 啟動時預設進入 bash
 CMD ["bash"]
