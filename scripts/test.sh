@@ -1,5 +1,5 @@
 docker exec -it mininet_network bash
 
-mn --controller=remote,ip=opendaylight,port=6633 --topo=single,25
-
-mininet> pingall
+   
+    # 建立拓樸並連向 Ryu 控制器
+   mn --controller=remote,ip=ryu,port=6633 --topo=tree,depth=5,fanout=5

@@ -1,22 +1,18 @@
 services:
-  opendaylight:
-    image: opendaylight/odl:latest
-    platform: linux/amd64
-    container_name: odl_controller
-    tty: true
-    stdin_open: true
+  ryu:
+    image: python:3.11-slim
+    container_name: ryu_controller
     ports:
-      - "8181:8181" # RESTCONF
+      - "8080:8080" # Ryu REST API
       - "6633:6633" # OpenFlow
-      - "6653:6653" # OpenFlow (Newer ODL)
-    environment:
-      # ODL 需要安裝這些 feature 才能支援 OpenFlow 與 RESTCONF
-      - ODL_INSTALL_FEATURES=odl-restconf,odl-openflowplugin-all,odl-mdsal-apidocs,odl-dlux-core
+    command: >
+      sh -c "pip install ryu && 
+             ryu-manager ryu.app.rest_topology ryu.app.ofctl_rest ryu.app.simple_switch_13"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8181/restconf/operational/network-topology:network-topology"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+      test: ["CMD", "curl", "-f", "http://localhost:8080/stats/switches"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   mininet:
     build:
@@ -24,11 +20,11 @@ services:
     container_name: mininet_network
     privileged: true
     volumes:
-      - /lib/modules:/lib/modules:ro # 共享內核模組 (Mininet 需要)
+      - /lib/modules:/lib/modules:ro
     stdin_open: true
     tty: true
     depends_on:
-      opendaylight:
+      ryu:
         condition: service_healthy
 
   sdn-adapter:
@@ -37,9 +33,10 @@ services:
     ports:
       - "4000:4000"
     environment:
-      - ODL_URL=http://opendaylight:8181
+      - SDN_TYPE=RYU
+      - RYU_URL=http://ryu:8080
     depends_on:
-      - opendaylight
+      - ryu
 
   frontend:
     build:

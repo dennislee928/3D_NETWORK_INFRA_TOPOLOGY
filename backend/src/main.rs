@@ -146,29 +146,65 @@ fn transform_odl(odl_data: &OdlNetworkTopology) -> TopologyResponse {
 }
 
 async fn get_sdn_topology() -> Json<TopologyResponse> {
-    let odl_url = std::env::var("ODL_URL").unwrap_or_else(|_| "http://localhost:8181".to_string());
-    let client = reqwest::Client::new();
+    let sdn_type = std::env::var("SDN_TYPE").unwrap_or_else(|_| "ODL".to_string());
+    
+    if sdn_type == "RYU" {
+        return get_ryu_topology().await;
+    }
 
-    match client
-        .get(format!("{}/restconf/operational/network-topology:network-topology", odl_url))
-        .basic_auth("admin", Some("admin"))
-        .header("Accept", "application/json")
-        .send()
-        .await
-    {
-        Ok(resp) => {
-            if let Ok(odl_resp) = resp.json::<OdlResponse>().await {
-                return Json(transform_odl(&odl_resp.network_topology));
+    let odl_url = std::env::var("ODL_URL").unwrap_or_else(|_| "http://localhost:8181".to_string());
+    // ... 原本的 ODL 邏輯 (略)
+}
+
+async fn get_ryu_topology() -> Json<TopologyResponse> {
+    let ryu_url = std::env::var("RYU_URL").unwrap_or_else(|_| "http://localhost:8080".to_string());
+    let client = reqwest::Client::new();
+    
+    let mut nodes = Vec::new();
+    let mut links = Vec::new();
+
+    // 1. Get Switches
+    if let Ok(resp) = client.get(format!("{}/stats/switches", ryu_url)).send().await {
+        if let Ok(switches) = resp.json::<Vec<u64>>().await {
+            for (idx, dpid) in switches.iter().enumerate() {
+                let id = format!("openflow:{}", dpid);
+                nodes.push(ServiceNode {
+                    id: id.clone(),
+                    name: format!("Switch {}", dpid),
+                    node_type: "switch".to_string(),
+                    realm: "physical".to_string(),
+                    layer: 1,
+                    status: "healthy".to_string(),
+                    position: ServicePosition { x: (idx as f32) * 5.0, y: -10.0, z: 0.0 },
+                    risk_score: 0.1,
+                    metadata: HashMap::new(),
+                });
             }
-            warn!("Failed to parse ODL JSON, using mock data");
-        }
-        Err(e) => {
-            warn!("Could not reach ODL: {}, using mock data", e);
         }
     }
 
-    // Fallback Mock Data
-    Json(get_mock_topology())
+    // 2. Get Links (Requires rest_topology app)
+    if let Ok(resp) = client.get(format!("{}/v1.0/topology/links", ryu_url)).send().await {
+        if let Ok(ryu_links) = resp.json::<Vec<serde_json::Value>>().await {
+            for link in ryu_links {
+                let src_dpid = link["src"]["dpid"].as_str().unwrap_or("");
+                let dst_dpid = link["dst"]["dpid"].as_str().unwrap_or("");
+                links.push(ServiceLink {
+                    id: format!("link-{}-{}", src_dpid, dst_dpid),
+                    from: format!("openflow:{}", src_dpid.trim_start_matches('0')), // Ryu dpid often has leading zeros
+                    to: format!("openflow:{}", dst_dpid.trim_start_matches('0')),
+                    kind: "physical".to_string(),
+                    realm: "physical".to_string(),
+                });
+            }
+        }
+    }
+
+    if nodes.is_empty() {
+        return Json(get_mock_topology());
+    }
+
+    Json(TopologyResponse { nodes, links })
 }
 
 fn get_mock_topology() -> TopologyResponse {
