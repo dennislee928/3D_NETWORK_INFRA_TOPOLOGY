@@ -20,7 +20,7 @@ services:
       - key: PORT
         value: "10000"
       - key: RUST_LOG
-        value: info
+        value: "info"
 
   - type: web
     name: topology-frontend-3d
@@ -41,7 +41,6 @@ services:
           name: sdn-adapter-rust
           property: hostport
 
-
   - type: web
     name: ryu-controller
     runtime: docker
@@ -54,30 +53,3 @@ services:
       paths:
         - ryu/**
         - render.yaml
-
--type: web
-  name: sdn-adapter-rust
-  runtime: docker
-  plan: free
-  region: singapore
-  dockerfilePath: ./backend/Dockerfile
-  dockerContext: ./backend
-  healthCheckPath: /health
-  autoDeployTrigger: commit
-  buildFilter:
-    paths:
-      - backend/**
-
--type: web
-  name: mininet-network
-  runtime: docker
-  plan: free
-  region: singapore
-  dockerfilePath: ./mininet/Dockerfile
-  dockerContext: ./mininet
-  autoDeployTrigger: commit
-  buildFilter:
-    paths:
-      - mininet/**
-      - render.yaml
-
