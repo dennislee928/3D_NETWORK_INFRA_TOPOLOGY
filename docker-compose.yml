@@ -1,15 +1,13 @@
 services:
   ryu:
-    image: python:3.11-slim
+    build:
+      context: ./ryu
     container_name: ryu_controller
     ports:
       - "8080:8080" # Ryu REST API
       - "6633:6633" # OpenFlow
-    command: >
-      sh -c "pip install ryu && 
-             ryu-manager ryu.app.rest_topology ryu.app.ofctl_rest ryu.app.simple_switch_13"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/stats/switches"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/stats/switches')"]
       interval: 10s
       timeout: 5s
       retries: 3
