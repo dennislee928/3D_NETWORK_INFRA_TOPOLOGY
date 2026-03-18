@@ -57,6 +57,9 @@ export function App() {
             subtitle="Live service graph backed by the new topology endpoint."
             aside={<span className="panel-pill">{topology.nodes.length} services</span>}
           >
+            {topology.usingMockData ? (
+              <p className="topology-mock-info" role="status">Using mock data.</p>
+            ) : null}
             <div className="topology-layout">
               <div className="topology-stage">
                 <Suspense fallback={<div className="topology-loading">Loading topology workspace...</div>}>

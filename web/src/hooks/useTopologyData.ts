@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { getTopologyServices } from "../lib/api";
 import type { ServiceLink, ServiceNode, TopologyResponse } from "../types/topology";
 
-interface TopologyState {
+export interface TopologyState {
   nodes: ServiceNode[];
   links: ServiceLink[];
   loading: boolean;
   error: string | null;
+  /** True when showing FALLBACK_TOPOLOGY (API error or API returned 0 services). */
+  usingMockData: boolean;
 }
 
 const FALLBACK_TOPOLOGY: TopologyResponse = {
@@ -116,7 +118,8 @@ export function useTopologyData(): TopologyState {
     nodes: [],
     links: [],
     loading: true,
-    error: null
+    error: null,
+    usingMockData: false
   });
 
   useEffect(() => {
@@ -124,10 +127,27 @@ export function useTopologyData(): TopologyState {
 
     async function load() {
       try {
-        setState(prev => ({ ...prev, loading: true, error: null }));
+        setState(prev => ({ ...prev, loading: true, error: null, usingMockData: false }));
         const topology = await getTopologyServices();
         if (controller.signal.aborted) return;
-        setState({ nodes: topology.nodes, links: topology.links, loading: false, error: null });
+        const noServices = !topology.nodes?.length && !topology.links?.length;
+        if (noServices) {
+          setState({
+            nodes: FALLBACK_TOPOLOGY.nodes,
+            links: FALLBACK_TOPOLOGY.links,
+            loading: false,
+            error: null,
+            usingMockData: true
+          });
+        } else {
+          setState({
+            nodes: topology.nodes,
+            links: topology.links,
+            loading: false,
+            error: null,
+            usingMockData: false
+          });
+        }
       } catch (error) {
         if (controller.signal.aborted) return;
         const message = error instanceof Error ? error.message : String(error);
@@ -135,7 +155,8 @@ export function useTopologyData(): TopologyState {
           nodes: FALLBACK_TOPOLOGY.nodes,
           links: FALLBACK_TOPOLOGY.links,
           loading: false,
-          error: message
+          error: message,
+          usingMockData: true
         });
       }
     }

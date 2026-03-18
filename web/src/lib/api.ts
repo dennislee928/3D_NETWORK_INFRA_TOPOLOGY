@@ -1,3 +1,5 @@
+
+
 import type { DashboardOverviewResponse } from "../types/dashboard";
 import type { TopologyResponse } from "../types/topology";
 
@@ -23,8 +25,7 @@ interface RawTopologyResponse {
 }
 
 function baseUrl() {
-  const raw = import.meta.env.VITE_AXIOM_API_URL?.trim() ?? "";
-  return raw.replace(/\/+$/, "");
+  return "https://axiom-rule-siem-engine-0z43.onrender.com";
 }
 
 function apiUrl(path: string) {
