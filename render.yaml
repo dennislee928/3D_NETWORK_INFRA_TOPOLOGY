@@ -54,15 +54,16 @@ services:
         - ryu/**
         - render.yaml
 
-  - type: web
-    name: mininet-network
-    runtime: docker
-    plan: free
-    region: singapore
-    dockerfilePath: ./mininet/Dockerfile
-    dockerContext: ./mininet
-    autoDeployTrigger: commit
-    buildFilter:
-      paths:
-        - mininet/**
-        - render.yaml
+  #  - type: web
+  #  name: mininet-network
+  #  runtime: docker
+  #  plan: free
+  #  region: singapore
+  #  dockerfilePath: ./mininet/Dockerfile
+  #  dockerContext: ./mininet
+  #  autoDeployTrigger: commit
+  #  buildFilter:
+  #    paths:
+  #      - mininet/**
+  #      - render.yaml
+
