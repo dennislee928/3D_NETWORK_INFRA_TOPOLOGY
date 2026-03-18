@@ -55,7 +55,18 @@ export function getDashboardOverview() {
 }
 
 export async function getSDNTopology(): Promise<TopologyResponse> {
-  // Mock ODL RESTCONF Topology
+  const adapterUrl = (import.meta as any).env?.VITE_SDN_ADAPTER_URL || "http://localhost:4000";
+  
+  try {
+    const response = await fetch(`${adapterUrl}/api/v1/topology/sdn`);
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (e) {
+    console.warn("SDN Adapter not reachable, using fallback mock data.");
+  }
+
+  // Fallback Mock Data
   return {
     nodes: [
       {
