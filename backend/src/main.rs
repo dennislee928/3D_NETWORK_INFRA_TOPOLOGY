@@ -200,6 +200,8 @@ async fn main() {
         .allow_headers(Any);
 
     let app = Router::new()
+        .route("/", get(|| async { "SDN Adapter is running" }))
+        .route("/health", get(|| async { "OK" }))
         .route("/api/v1/topology/sdn", get(get_sdn_topology))
         .layer(cors);
 

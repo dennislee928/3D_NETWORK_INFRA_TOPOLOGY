@@ -1,0 +1,32 @@
+services:
+  # 1. Rust SDN Adapter 後端
+  - type: web
+    name: sdn-adapter-rust
+    runtime: rust
+    plan: free
+    region: singapore
+    buildCommand: cd backend && cargo build --release
+    startCommand: ./backend/target/release/backend
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: ODL_URL
+        value: http://localhost:8181 # 預設 mock 模式
+      - key: RUST_LOG
+        value: info
+
+  # 2. 前端 3D 拓樸展示 (Static Site)
+  - type: static
+    name: topology-frontend-3d
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: cd web && npm install && npm run build
+    staticPublishPath: web/dist
+    envVars:
+      # 自動抓取上面後端的服務連結 (此時 VITE 會讀取到對應的 URL)
+      - key: VITE_SDN_ADAPTER_URL
+        fromService:
+          type: web
+          name: sdn-adapter-rust
+          property: url
