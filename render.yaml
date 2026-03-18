@@ -40,3 +40,44 @@ services:
           type: web
           name: sdn-adapter-rust
           property: hostport
+
+
+  - type: web
+    name: ryu-controller
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./ryu/Dockerfile
+    dockerContext: ./ryu
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - ryu/**
+        - render.yaml
+
+-type: web
+  name: sdn-adapter-rust
+  runtime: docker
+  plan: free
+  region: singapore
+  dockerfilePath: ./backend/Dockerfile
+  dockerContext: ./backend
+  healthCheckPath: /health
+  autoDeployTrigger: commit
+  buildFilter:
+    paths:
+      - backend/**
+
+-type: web
+  name: mininet-network
+  runtime: docker
+  plan: free
+  region: singapore
+  dockerfilePath: ./mininet/Dockerfile
+  dockerContext: ./mininet
+  autoDeployTrigger: commit
+  buildFilter:
+    paths:
+      - mininet/**
+      - render.yaml
+
