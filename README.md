@@ -88,12 +88,31 @@ go run ./cmd/server
 
 ---
 
-## 待辦與規劃方向
+##  啟動與測試
 
-- [ ] 補上實際技術棧說明（前端、後端、資料來源）
-- [ ] 撰寫詳細安裝與啟動步驟（含環境變數說明）
-- [ ] 加入架構圖與 ERD 圖（可放在 `docs/`）
-- [ ] 加入 CI/CD 與自動化測試說明
+
+
+A. 啟動所有服務 (這可能需要幾分鐘，因為 ODL 啟動較慢)
+   1 docker-compose up -d --build
+
+  B. 進入 Mininet 容器並建立拓樸
+  一旦 OpenDaylight 的 healthcheck 通過，進入 mininet_network 容器：
+   1 docker exec -it mininet_network bash
+
+  在容器內執行 mn 命令，將模擬網路連向 ODL 容器 (透過 Docker DNS 名稱 opendaylight)：
+
+   1 # 建立一個包含 1 個 Switch、3 個 Host 的星型拓樸
+   2 mn --controller=remote,ip=opendaylight,port=6633 --topo=single,3
+
+  C. 驗證
+   1. 在 Mininet 中執行 pingall，確保 Host 之間可以連通。
+   2. 查看前端 3D 拓樸：實體層 (Physical Realm) 應該會出現 1 個 Switch 與 3 個 Host，並且這 3 個 Host 會連向 Switch。
+
+  為什麼這樣有效？
+   1. 分層部署: ODL 作為「大腦」跑在獨立容器，Mininet 作為「肌肉」跑在特權容器。
+   2. SDN Adapter: 您的 Adapter 會定期向 ODL 請求拓樸資訊。當 Mininet 把 Switch/Host 註冊給 ODL 時，Adapter 會捕捉到這些
+      OpenFlow 節點，轉換為 nodes JSON，再交給前端 React Three Fiber 渲染。
+
 
 ---
 
