@@ -6,7 +6,7 @@ services:
     plan: free
     region: singapore
     buildCommand: cd backend && cargo build --release
-    startCommand: ./backend/target/release/backend
+    startCommand: cd backend && ./target/release/backend
     envVars:
       - key: PORT
         value: 4000

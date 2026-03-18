@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::net::SocketAddr;
 use tower_http::cors::{Any, CorsLayer};
-use tracing::{info, warn};
+use tracing::info;
 
 // --- Frontend Data Models ---
 
@@ -237,6 +237,32 @@ fn get_mock_topology() -> TopologyResponse {
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
+
+    // #region agent log
+    fn agent_log(hypothesis_id: &str, location: &str, message: &str, data: serde_json::Value) {
+        use std::io::Write;
+        let payload = serde_json::json!({
+            "sessionId": "b61a46",
+            "runId": "pre-fix",
+            "hypothesisId": hypothesis_id,
+            "location": location,
+            "message": message,
+            "data": data,
+            "timestamp": (std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap_or_default()
+                .as_millis() as u64),
+        });
+        if let Ok(mut f) = std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open("/Users/dennis_leedennis_lee/Documents/GitHub/3D_NETWORK_INFRA_TOPOLOGY/.cursor/debug-b61a46.log")
+        {
+            let _ = writeln!(f, "{}", payload);
+        }
+    }
+    // #endregion
+
     let cors = CorsLayer::new().allow_origin(Any).allow_methods(Any).allow_headers(Any);
     let app = Router::new()
         .route("/", get(|| async { "SDN Adapter is running" }))
@@ -244,8 +270,47 @@ async fn main() {
         .route("/api/v1/topology/sdn", get(get_sdn_topology))
         .layer(cors);
 
-    let addr = SocketAddr::from(([0, 0, 0, 0], 4000));
+    let port: u16 = std::env::var("PORT")
+        .ok()
+        .and_then(|v| v.parse::<u16>().ok())
+        .unwrap_or(4000);
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
+    agent_log(
+        "B",
+        "backend/src/main.rs:main",
+        "startup",
+        serde_json::json!({
+            "cwd": std::env::current_dir().ok().map(|p| p.display().to_string()),
+            "port_env_set": std::env::var("PORT").is_ok(),
+            "port": port,
+            "addr": addr.to_string(),
+        }),
+    );
     info!("Rust SDN Adapter listening on {}", addr);
-    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    let listener = match tokio::net::TcpListener::bind(addr).await {
+        Ok(l) => l,
+        Err(e) => {
+            agent_log(
+                "C",
+                "backend/src/main.rs:main",
+                "bind_failed",
+                serde_json::json!({
+                    "addr": addr.to_string(),
+                    "error_kind": format!("{:?}", e.kind()),
+                    "error": e.to_string(),
+                }),
+            );
+            return;
+        }
+    };
+    if let Err(e) = axum::serve(listener, app).await {
+        agent_log(
+            "C",
+            "backend/src/main.rs:main",
+            "serve_failed",
+            serde_json::json!({
+                "error": e.to_string(),
+            }),
+        );
+    }
 }
