@@ -35,11 +35,11 @@ services:
         - web/**
         - render.yaml
     envVars:
-      - key: SDN_ADAPTER_HOSTPORT
+      - key: SDN_ADAPTER_URL
         fromService:
           type: web
           name: sdn-adapter-rust
-          property: hostport
+          property: url
 
   - type: web
     name: ryu-controller
