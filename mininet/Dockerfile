@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     iputils-ping \
     iproute2 \
+    curl \
     openvswitch-switch \
     && rm -rf /var/lib/apt/lists/*
 

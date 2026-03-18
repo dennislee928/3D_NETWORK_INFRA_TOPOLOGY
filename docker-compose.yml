@@ -17,6 +17,12 @@ services:
       context: ./mininet
     container_name: mininet_network
     privileged: true
+    environment:
+      - AUTO_MININET=1
+      - RYU_HOST=ryu
+      - RYU_OF_PORT=6633
+      - RYU_REST_PORT=8080
+      - MININET_TOPO=tree,depth=5,fanout=5
     volumes:
       - /lib/modules:/lib/modules:ro
     stdin_open: true
