@@ -2,6 +2,27 @@ import { useEffect, useState } from "react";
 import { getTopologyServices, getSDNTopology } from "../lib/api";
 import type { ServiceLink, ServiceNode, TopologyResponse, TopologyRealm } from "../types/topology";
 
+// #region agent log
+function agentLog(hypothesisId: string, location: string, message: string, data: Record<string, unknown>) {
+  fetch("http://127.0.0.1:7293/ingest/66d8e5aa-62df-4dc2-b960-1a0de6597420", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Debug-Session-Id": "b61a46"
+    },
+    body: JSON.stringify({
+      sessionId: "b61a46",
+      runId: "pre-fix-fe",
+      hypothesisId,
+      location,
+      message,
+      data,
+      timestamp: Date.now()
+    })
+  }).catch(() => {});
+}
+// #endregion
+
 export interface TopologyState {
   nodes: ServiceNode[];
   links: ServiceLink[];
@@ -144,6 +165,7 @@ export function useTopologyData(): TopologyState {
     async function load() {
       try {
         setState(prev => ({ ...prev, loading: true, error: null, usingMockData: false }));
+        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "load_start", {});
         
         // Fetch both Service and SDN topologies in parallel
         const [serviceTopology, sdnTopology] = await Promise.all([
@@ -152,6 +174,12 @@ export function useTopologyData(): TopologyState {
         ]);
 
         if (controller.signal.aborted) return;
+        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "load_fetched", {
+          serviceNodes: serviceTopology?.nodes?.length ?? null,
+          serviceLinks: serviceTopology?.links?.length ?? null,
+          sdnNodes: sdnTopology?.nodes?.length ?? null,
+          sdnLinks: sdnTopology?.links?.length ?? null
+        });
 
         const baseNodes = serviceTopology.nodes?.length ? serviceTopology.nodes : FALLBACK_TOPOLOGY.nodes;
         const baseLinks = serviceTopology.links?.length ? serviceTopology.links : FALLBACK_TOPOLOGY.links;
@@ -159,7 +187,7 @@ export function useTopologyData(): TopologyState {
         // Apply Y-axis offsets and set default realm
         const processedServiceNodes = baseNodes.map(node => ({
           ...node,
-          realm: node.realm || "service",
+          realm: "service" as TopologyRealm,
           position: node.position ? {
             ...node.position,
             y: node.position.y + REALM_Y_OFFSET["service"]
@@ -183,6 +211,19 @@ export function useTopologyData(): TopologyState {
           { id: "cross-layer-1", from: "edge-gateway", to: "ovs-virt-01", kind: "logical", realm: "virtual" } as ServiceLink
         ];
 
+        agentLog("C", "web/src/hooks/useTopologyData.ts:load", "load_processed", {
+          allNodes: allNodes.length,
+          allLinks: allLinks.length,
+          realmCounts: allNodes.reduce(
+            (acc, n) => {
+              const r = (((n as any)?.realm as string | undefined) || "service") as string;
+              acc[r] = (acc[r] ?? 0) + 1;
+              return acc;
+            },
+            {} as Record<string, number>
+          )
+        });
+
         setState({
           nodes: allNodes,
           links: allLinks,
@@ -193,6 +234,7 @@ export function useTopologyData(): TopologyState {
       } catch (error) {
         if (controller.signal.aborted) return;
         const message = error instanceof Error ? error.message : String(error);
+        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "load_failed", { error: message });
         
         // Even on error, we try to show something (SDN + Fallback)
         const sdn = await getSDNTopology().catch(() => ({ nodes: [], links: [] }));

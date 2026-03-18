@@ -16,7 +16,7 @@ services:
         value: info
 
   # 2. 前端 3D 拓樸展示 (Static Site)
-  - type: static
+  - type: web
     name: topology-frontend-3d
     runtime: node
     plan: free
