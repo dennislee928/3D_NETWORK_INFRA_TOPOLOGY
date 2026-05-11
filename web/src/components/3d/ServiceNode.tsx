@@ -3,12 +3,14 @@ import { ThreeEvent } from "@react-three/fiber";
 import { useMemo } from "react";
 import type { ServiceNode } from "../../types/topology";
 import { useSelectionStore } from "../../state/useSelectionStore";
+import { sanitizeLabel } from "../../lib/sanitize";
 
 interface Props {
   node: ServiceNode;
+  highlighted?: boolean;
 }
 
-export function ServiceNode({ node }: Props) {
+export function ServiceNode({ node, highlighted = true }: Props) {
   const { hoveredId, selectedId, setHovered, setSelected } = useSelectionStore();
   const isHovered = hoveredId === node.id;
   const isSelected = selectedId === node.id;
@@ -67,10 +69,12 @@ export function ServiceNode({ node }: Props) {
         {node.type === "other" && <sphereGeometry args={[radius, 16, 16]} />}
         <meshStandardMaterial
           color={color}
-          emissive={isHovered || isSelected ? color : "#000000"}
-          emissiveIntensity={isHovered ? 0.8 : isSelected ? 0.5 : 0.1}
+          emissive={isHovered || isSelected ? color : highlighted ? "#000000" : color}
+          emissiveIntensity={isHovered ? 0.8 : isSelected ? 0.5 : highlighted ? 0.1 : 0.8}
           metalness={0.2}
           roughness={0.3}
+          transparent
+          opacity={highlighted ? 1 : 0.3}
         />
       </mesh>
 
@@ -84,7 +88,7 @@ export function ServiceNode({ node }: Props) {
         outlineColor="#020617"
         outlineWidth={0.02}
       >
-        {node.name}
+        {sanitizeLabel(node.name)}
       </Text>
 
       {/* Optional HTML tooltip when hovered */}
@@ -100,7 +104,7 @@ export function ServiceNode({ node }: Props) {
               border: "1px solid rgba(148,163,184,0.6)"
             }}
           >
-            <div style={{ fontWeight: 600, marginBottom: 2 }}>{node.name}</div>
+            <div style={{ fontWeight: 600, marginBottom: 2 }}>{sanitizeLabel(node.name)}</div>
             <div style={{ opacity: 0.9 }}>type: {node.type}</div>
             <div style={{ opacity: 0.9 }}>status: {node.status}</div>
             {typeof node.riskScore === "number" && (

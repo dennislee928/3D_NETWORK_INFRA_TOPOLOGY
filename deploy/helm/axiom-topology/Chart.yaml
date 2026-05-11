@@ -1,0 +1,17 @@
+apiVersion: v2
+name: axiom-topology
+description: Axiom 3D Network Topology visualization platform — Helm chart for Kubernetes deployment.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - sdn
+  - network-topology
+  - 3d-visualization
+  - ryu
+  - rust
+home: https://github.com/anomalyco/3D_NETWORK_INFRA_TOPOLOGY
+sources:
+  - https://github.com/anomalyco/3D_NETWORK_INFRA_TOPOLOGY
+maintainers:
+  - name: Axiom Topology Team

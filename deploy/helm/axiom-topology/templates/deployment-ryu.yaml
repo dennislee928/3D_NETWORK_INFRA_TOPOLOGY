@@ -1,0 +1,31 @@
+{{- if .Values.ryu.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "axiom-topology.fullname" . }}-ryu
+  labels:
+    {{- include "axiom-topology.labels" . | nindent 4 }}
+    app.kubernetes.io/component: ryu
+spec:
+  replicas: {{ .Values.ryu.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "axiom-topology.ryuSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "axiom-topology.ryuSelectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: ryu
+    spec:
+      containers:
+        - name: ryu
+          image: "{{ .Values.ryu.image.repository }}:{{ .Values.ryu.image.tag }}"
+          imagePullPolicy: {{ .Values.ryu.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.ryu.service.restPort }}
+              name: rest-api
+            - containerPort: {{ .Values.ryu.service.ofPort }}
+              name: openflow
+          resources:
+            {{- toYaml .Values.ryu.resources | nindent 12 }}
+{{- end }}

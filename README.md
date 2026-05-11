@@ -1,5 +1,77 @@
 # 3D Network Infra Topology
 
+> **Axiom Topology** — 3D SDN Network Visualization Platform
+
+Axiom Topology is a real-time 3D network infrastructure visualization platform that displays physical, virtual, and service-layer topologies simultaneously. Built with React Three Fiber for the frontend and Rust (Axum) for the SDN adapter, it connects to Ryu or OpenDaylight (ODL) controllers to render live network state.
+
+```
+ ┌─────────────────────────────────────────────────────────┐
+ │                    React Frontend                        │
+ │     (Three.js / R3F / TypeScript / Vite)                │
+ │     Port 5173 (dev) / 80 (prod)                         │
+ └─────────────────────┬───────────────────────────────────┘
+                       │ HTTP / WebSocket
+                       ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │              Rust SDN Adapter (Axum)                     │
+ │   - /api/v1/topology/sdn  - /api/v1/dashboard/overview  │
+ │   - /health               - /metrics (Prometheus)        │
+ │   Port 4000                                              │
+ └────┬────────────────┬────────────────┬───────────────────┘
+      │ Ryu REST       │ ODL REST       │ Mock (fallback)
+      ▼                ▼                ▼
+ ┌──────────┐  ┌──────────────┐  ┌──────────────┐
+ │ Ryu      │  │ OpenDaylight │  │ Mininet      │
+ │ Port     │  │ Port 8181    │  │ (simulated   │
+ │ 8080     │  │ (optional)   │  │  topology)   │
+ └──────────┘  └──────────────┘  └──────────────┘
+```
+
+### Tech Stack
+
+| Layer          | Technology                         |
+|----------------|------------------------------------|
+| Frontend       | React 19, Three.js, React Three Fiber, TypeScript, Vite, Zustand |
+| Backend        | Rust, Axum 0.8, Tokio, Reqwest, Serde |
+| SDN Controller | Ryu (primary), OpenDaylight (optional) |
+| Simulation     | Mininet (containerized)            |
+| Container      | Docker Compose                     |
+| Deployment     | Render (cloud), Helm (Kubernetes)  |
+
+### Quick Start
+
+**Prerequisites:** Docker & Docker Compose
+
+```bash
+# Clone and start all services
+docker compose up -d --build
+
+# (optional) Create a Mininet topology inside the running container
+docker exec -it mininet_network mn --controller=remote,ip=ryu,port=6633 --topo=single,3
+```
+
+Open **http://localhost:5173** to see the 3D topology.
+
+### Project Structure
+
+- `web/` — React 3D frontend (Three.js / R3F)
+- `backend/` — Rust SDN adapter (Axum REST API)
+- `ryu/` — Ryu SDN controller (Python)
+- `mininet/` — Mininet network simulation (Docker)
+- `deploy/` — Kubernetes Helm chart (`deploy/helm/axiom-topology`)
+- `doc/` — Documentation, API spec, demo data, integration guides
+- `docker-compose.yml` — One-command local environment
+- `render.yaml` — Render cloud deployment blueprint
+
+### License
+
+MIT License — see the full license at the bottom of this file for details.
+
+---
+---
+
+# 3D Network Infra Topology
+
 本專案是一個基於 **React Three Fiber (3D)**、**Rust (Axum)** 與 **SDN (Ryu)** 的網路拓樸視覺化系統。它能同時展示「實體網路層 (Physical)」、「虛擬網路層 (Virtual)」與「服務應用層 (Service)」，協助工程師直觀地理解複雜的基礎設施關聯。
 
 ---

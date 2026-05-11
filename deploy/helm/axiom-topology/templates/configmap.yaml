@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "axiom-topology.fullname" . }}-config
+  labels:
+    {{- include "axiom-topology.labels" . | nindent 4 }}
+data:
+  RUST_LOG: {{ .Values.backend.env.RUST_LOG | quote }}
+  SDN_TYPE: {{ .Values.backend.env.SDN_TYPE | quote }}
+  ALLOWED_ORIGINS: {{ .Values.backend.env.ALLOWED_ORIGINS | quote }}
+  RYU_URL: {{ .Values.backend.env.RYU_URL | quote }}
+  ODL_URL: {{ .Values.backend.env.ODL_URL | quote }}
+  ODL_USERNAME: {{ .Values.backend.env.ODL_USERNAME | quote }}
+  PORT: {{ .Values.backend.env.PORT | quote }}
+  SDN_ADAPTER_HOSTPORT: {{ .Values.frontend.env.SDN_ADAPTER_HOSTPORT | quote }}

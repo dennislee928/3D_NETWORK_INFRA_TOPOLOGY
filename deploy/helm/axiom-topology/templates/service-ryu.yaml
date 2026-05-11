@@ -1,0 +1,20 @@
+{{- if .Values.ryu.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "axiom-topology.fullname" . }}-ryu
+  labels:
+    {{- include "axiom-topology.labels" . | nindent 4 }}
+    app.kubernetes.io/component: ryu
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "axiom-topology.ryuSelectorLabels" . | nindent 4 }}
+  ports:
+    - port: {{ .Values.ryu.service.restPort }}
+      targetPort: {{ .Values.ryu.service.restPort }}
+      name: rest-api
+    - port: {{ .Values.ryu.service.ofPort }}
+      targetPort: {{ .Values.ryu.service.ofPort }}
+      name: openflow
+{{- end }}

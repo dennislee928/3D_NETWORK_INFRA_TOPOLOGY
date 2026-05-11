@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import type { ServiceNode as ServiceNodeType } from "../../types/topology";
 import type { ServiceLink as ServiceLinkType } from "../../types/topology";
 import { ServiceNode } from "./ServiceNode";
@@ -10,15 +10,35 @@ interface Props {
   links: ServiceLinkType[];
   loading: boolean;
   error: string | null;
+  highlightedNodeIds?: Set<string>;
 }
 
-export function ServiceGraph({ nodes, links, loading, error }: Props) {
+function deepEqual(a: unknown, b: unknown): boolean {
+  return JSON.stringify(a) === JSON.stringify(b);
+}
+
+export function ServiceGraph({ nodes, links, loading, error, highlightedNodeIds }: Props) {
+  const prevNodesRef = useRef<ServiceNodeType[]>(nodes)
+  const prevLinksRef = useRef<ServiceLinkType[]>(links)
+
+  const stableNodes = useMemo(() => {
+    if (deepEqual(prevNodesRef.current, nodes)) return prevNodesRef.current
+    prevNodesRef.current = nodes
+    return nodes
+  }, [nodes])
+
+  const stableLinks = useMemo(() => {
+    if (deepEqual(prevLinksRef.current, links)) return prevLinksRef.current
+    prevLinksRef.current = links
+    return links
+  }, [links])
+
+  const hasHighlight = highlightedNodeIds !== undefined
 
   const positionedNodes: ServiceNodeType[] = useMemo(() => {
-    if (!nodes.length) return [];
-    // 若節點未提供 position，依 layer 做簡易 layout
+    if (!stableNodes.length) return [];
     const byLayer = new Map<number, ServiceNodeType[]>();
-    for (const n of nodes) {
+    for (const n of stableNodes) {
       const layer = n.layer ?? 0;
       const arr = byLayer.get(layer) ?? [];
       arr.push(n);
@@ -46,7 +66,7 @@ export function ServiceGraph({ nodes, links, loading, error }: Props) {
       });
     });
     return updated;
-  }, [nodes]);
+  }, [stableNodes]);
 
   const nodeMap = useMemo(() => {
     const map = new Map<string, ServiceNodeType>();
@@ -56,13 +76,28 @@ export function ServiceGraph({ nodes, links, loading, error }: Props) {
     return map;
   }, [positionedNodes]);
 
-  if (loading && !nodes.length) {
+  const renderNode = useCallback((node: ServiceNodeType) => {
+    const highlighted = !hasHighlight || (highlightedNodeIds?.has(node.id) ?? true)
+    return <ServiceNode key={node.id} node={node} highlighted={highlighted} />
+  }, [hasHighlight, highlightedNodeIds])
+
+  const renderLink = useCallback((link: ServiceLinkType) => {
+    return (
+      <ServiceLink
+        key={link.id}
+        link={link}
+        fromNode={nodeMap.get(link.from)}
+        toNode={nodeMap.get(link.to)}
+      />
+    )
+  }, [nodeMap])
+
+  if (loading && !stableNodes.length) {
     return null;
   }
 
   return (
     <>
-      {/* ground plane for orientation */}
       <gridHelper args={[40, 40, "#1f2937", "#111827"]} position={[0, -0.01, 0]} />
 
       {error && (
@@ -77,23 +112,14 @@ export function ServiceGraph({ nodes, links, loading, error }: Props) {
               maxWidth: 320
             }}
           >
-            拓樸 API 讀取失敗，已使用 mock 資料。錯誤：{error}
+            Topology API failed, using mock data. Error: {error}
           </div>
         </Html>
       )}
 
-      {positionedNodes.map(node => (
-        <ServiceNode key={node.id} node={node} />
-      ))}
+      {positionedNodes.map(renderNode)}
 
-      {links.map(link => (
-        <ServiceLink
-          key={link.id}
-          link={link}
-          fromNode={nodeMap.get(link.from)}
-          toNode={nodeMap.get(link.to)}
-        />
-      ))}
+      {stableLinks.map(renderLink)}
     </>
   );
 }

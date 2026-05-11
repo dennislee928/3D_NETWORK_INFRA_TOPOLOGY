@@ -11,23 +11,25 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@react-three/drei": "^9.121.0",
+    "@react-three/fiber": "^9.5.0",
+    "dompurify": "^3.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@react-three/fiber": "^9.5.0",
-    "@react-three/drei": "^9.121.0",
     "three": "^0.165.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@types/three": "^0.165.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.2.0",
+    "@types/dompurify": "^3.2.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.165.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "jsdom": "^26.0.0",
-    "typescript": "^5.7.0",
+    "typescript": "^5.7.3",
     "vite": "^6.0.0",
     "vitest": "^3.1.1"
   }

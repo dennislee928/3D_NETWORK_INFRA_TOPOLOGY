@@ -1,0 +1,112 @@
+# Default values for axiom-topology.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global settings
+global:
+  environment: production
+
+# --- Backend (Rust SDN Adapter) ---
+backend:
+  replicaCount: 1
+
+  image:
+    repository: axiom-sdn-adapter
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  service:
+    port: 4000
+    targetPort: 4000
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+
+  env:
+    PORT: "4000"
+    RUST_LOG: info
+    SDN_TYPE: RYU
+    RYU_URL: http://ryu-service:8080
+    ODL_URL: http://odl-service:8181
+    ODL_USERNAME: admin
+    ALLOWED_ORIGINS: http://localhost:5173,http://localhost:3000
+
+# --- Frontend (React 3D) ---
+frontend:
+  replicaCount: 1
+
+  image:
+    repository: axiom-topology-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  service:
+    port: 80
+    targetPort: 80
+
+  resources:
+    limits:
+      cpu: 200m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+  env:
+    SDN_ADAPTER_HOSTPORT: sdn-adapter-service:4000
+
+  ingress:
+    enabled: true
+    host: topology.example.com
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+
+# --- Ryu SDN Controller ---
+ryu:
+  enabled: true
+  replicaCount: 1
+
+  image:
+    repository: axiom-ryu-controller
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  service:
+    restPort: 8080
+    ofPort: 6633
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+# --- Secrets (sensitive values) ---
+secrets:
+  ODL_PASSWORD: admin
+  API_TOKEN: changeme
+
+# --- Ingress ---
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: topology.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: axiom-topology-tls
+      hosts:
+        - topology.example.com

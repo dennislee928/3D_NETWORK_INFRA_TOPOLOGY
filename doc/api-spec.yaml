@@ -1,0 +1,567 @@
+openapi: "3.0.3"
+info:
+  title: Axiom Topology — SDN Adapter API
+  description: |
+    REST API for the Axiom 3D Network Topology visualization platform.
+    Provides SDN topology data, dashboard overviews, health checks, and Prometheus metrics.
+  version: "1.0.0"
+  contact:
+    name: Axiom Topology Team
+  license:
+    name: MIT
+
+servers:
+  - url: http://localhost:4000
+    description: Local development
+  - url: https://sdn-adapter-rust.onrender.com
+    description: Render cloud deployment
+
+paths:
+  /health:
+    get:
+      operationId: healthCheck
+      summary: Health check
+      description: Returns a simple OK response indicating the service is alive.
+      tags:
+        - System
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "OK"
+
+  /api/v1/topology/sdn:
+    get:
+      operationId: getSdnTopology
+      summary: Get SDN topology
+      description: |
+        Returns the current SDN network topology including all discovered
+        switches, hosts, and physical/virtual links. Supports both Ryu and
+        ODL backends. Falls back to mock data if the controller is unreachable.
+      tags:
+        - Topology
+      parameters:
+        - name: SDN_TYPE
+          in: query
+          description: Override SDN controller type (RYU or ODL)
+          required: false
+          schema:
+            type: string
+            enum: [RYU, ODL]
+      responses:
+        "200":
+          description: Topology data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TopologyResponse"
+        "503":
+          description: Service unavailable (controller unreachable, using fallback)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TopologyResponse"
+
+  /api/v1/dashboard/overview:
+    get:
+      operationId: getDashboardOverview
+      summary: Dashboard overview data
+      description: Returns aggregated dashboard metrics, recent incidents, commands, and topology highlights.
+      tags:
+        - Dashboard
+      responses:
+        "200":
+          description: Dashboard overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardOverviewResponse"
+
+  /api/v1/topology/services:
+    get:
+      operationId: getTopologyServices
+      summary: Service topology
+      description: Returns the service-layer topology nodes and links (gateways, brokers, rule engines, inference models).
+      tags:
+        - Topology
+      responses:
+        "200":
+          description: Service topology data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TopologyResponse"
+
+  /metrics:
+    get:
+      operationId: getMetrics
+      summary: Prometheus metrics
+      description: Returns application metrics in Prometheus text/plain exposition format.
+      tags:
+        - System
+      responses:
+        "200":
+          description: Prometheus metrics
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  # HELP http_requests_total Total HTTP requests
+                  # TYPE http_requests_total counter
+                  http_requests_total{method="GET",path="/health"} 42
+                  # HELP topology_node_count Current number of topology nodes
+                  # TYPE topology_node_count gauge
+                  topology_node_count 15
+
+components:
+  schemas:
+    ServicePosition:
+      type: object
+      description: 3D position in the Three.js scene.
+      required:
+        - x
+        - y
+        - z
+      properties:
+        x:
+          type: number
+          format: float
+          description: X coordinate
+          example: -5.0
+        y:
+          type: number
+          format: float
+          description: Y coordinate (height in scene)
+          example: -10.0
+        z:
+          type: number
+          format: float
+          description: Z coordinate
+          example: 3.0
+
+    ServiceHealth:
+      type: object
+      description: Health metrics for a service node.
+      properties:
+        latencyMs:
+          type: number
+          description: Latency in milliseconds
+          example: 42
+        errorRate:
+          type: number
+          format: float
+          description: Error rate (0.0 – 1.0)
+          example: 0.04
+        lastDeploy:
+          type: string
+          format: date-time
+          example: "2026-05-10T12:00:00Z"
+        region:
+          type: string
+          example: "core"
+        incidentCount:
+          type: integer
+          example: 3
+        commandCount:
+          type: integer
+          example: 12
+        cpuUsage:
+          type: number
+          format: float
+          description: CPU usage (0.0 – 1.0)
+          example: 0.45
+        memoryUsage:
+          type: number
+          format: float
+          description: Memory usage (0.0 – 1.0)
+          example: 0.62
+        bandwidthUsage:
+          type: number
+          format: float
+          description: Bandwidth usage (0.0 – 1.0)
+          example: 0.78
+
+    ServiceNode:
+      type: object
+      description: A node in the topology (switch, host, gateway, inference model, etc.).
+      required:
+        - id
+        - name
+        - type
+        - layer
+        - status
+      properties:
+        id:
+          type: string
+          description: Unique identifier
+          example: "openflow:12345"
+        name:
+          type: string
+          description: Human-readable name
+          example: "Core Switch 01"
+        type:
+          type: string
+          description: Node type
+          enum:
+            - gateway
+            - rule-engine
+            - inference
+            - db
+            - queue
+            - agent
+            - switch
+            - host
+            - controller
+            - other
+          example: "switch"
+        layer:
+          type: integer
+          description: Layer in the 3D scene (1=physical, 2=virtual, 3=service)
+          example: 1
+        realm:
+          type: string
+          description: Topology realm
+          enum:
+            - physical
+            - virtual
+            - service
+          example: "physical"
+        status:
+          type: string
+          description: Operational status
+          enum:
+            - healthy
+            - degraded
+            - down
+          example: "healthy"
+        position:
+          $ref: "#/components/schemas/ServicePosition"
+        riskScore:
+          type: number
+          format: float
+          description: Risk score (0.0 – 1.0)
+          example: 0.12
+        health:
+          $ref: "#/components/schemas/ServiceHealth"
+        metadata:
+          type: object
+          description: Additional node metadata
+          example:
+            version: "Boron-SR4"
+            role: "leader"
+            ports: 8
+
+    LinkKind:
+      type: string
+      description: Type of link
+      enum:
+        - http
+        - amqp
+        - mqtt
+        - inference
+        - db
+        - stream
+        - physical
+        - logical
+
+    ServiceLink:
+      type: object
+      description: A link (edge) between two topology nodes.
+      required:
+        - id
+        - from
+        - to
+        - kind
+      properties:
+        id:
+          type: string
+          description: Unique link identifier
+          example: "link-c-s1"
+        from:
+          type: string
+          description: Source node ID
+          example: "sdn-controller"
+        to:
+          type: string
+          description: Target node ID
+          example: "sw-core-01"
+        kind:
+          $ref: "#/components/schemas/LinkKind"
+        realm:
+          type: string
+          description: Topology realm
+          enum:
+            - physical
+            - virtual
+            - service
+          example: "physical"
+        bandwidth:
+          type: integer
+          description: Bandwidth capacity in Mbps
+          example: 10000
+        utilization:
+          type: number
+          format: float
+          description: Current utilization (0.0 – 1.0)
+          example: 0.45
+
+    TopologyResponse:
+      type: object
+      description: Topology containing nodes and links.
+      required:
+        - nodes
+        - links
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceNode"
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceLink"
+
+    DashboardSummary:
+      type: object
+      properties:
+        total_incidents:
+          type: integer
+          example: 142
+        open_incidents:
+          type: integer
+          example: 12
+        resolved_incidents:
+          type: integer
+          example: 125
+        false_positive_incidents:
+          type: integer
+          example: 5
+        total_commands:
+          type: integer
+          example: 890
+        pending_commands:
+          type: integer
+          example: 3
+        guarded_assets:
+          type: integer
+          example: 47
+        total_decisions:
+          type: integer
+          example: 3400
+        automation_rate:
+          type: number
+          format: float
+          example: 0.87
+
+    DashboardIncident:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "inc-001"
+        title:
+          type: string
+          example: "High bandwidth on sw-edge-01"
+        severity:
+          type: string
+          example: "critical"
+        status:
+          type: string
+          example: "open"
+        rule_id:
+          type: string
+          example: "rule-bandwidth-01"
+        device_id:
+          type: string
+          example: "sw-edge-01"
+        created_at:
+          type: string
+          format: date-time
+          example: "2026-05-10T08:30:00Z"
+
+    DashboardCommand:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "cmd-001"
+        command_type:
+          type: string
+          example: "block_port"
+        status:
+          type: string
+          example: "pending"
+        risk_level:
+          type: string
+          example: "high"
+        device_id:
+          type: string
+          example: "sw-core-01"
+        created_at:
+          type: string
+          format: date-time
+          example: "2026-05-10T09:00:00Z"
+
+    DashboardMetric:
+      type: object
+      properties:
+        source:
+          type: string
+          example: "inference-hmm-beth"
+        label:
+          type: string
+          example: "anomaly_score"
+        value:
+          type: number
+          example: 0.87
+        sample_size:
+          type: integer
+          example: 10000
+        created_at:
+          type: string
+          format: date-time
+          example: "2026-05-10T10:00:00Z"
+
+    DashboardDecision:
+      type: object
+      properties:
+        event_id:
+          type: string
+          example: "evt-005"
+        source:
+          type: string
+          example: "inference-lstm-cicids"
+        risk_score:
+          type: number
+          format: float
+          example: 0.72
+        incident_id:
+          type: string
+          example: "inc-003"
+        matched_rule_ids:
+          type: array
+          items:
+            type: string
+          example: ["rule-01", "rule-02"]
+        defense_commands:
+          type: array
+          items:
+            type: object
+            properties:
+              command_id:
+                type: string
+                example: "cmd-005"
+              command_type:
+                type: string
+                example: "rate_limit"
+        at:
+          type: string
+          format: date-time
+          example: "2026-05-10T10:30:00Z"
+
+    DashboardEvalRun:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "eval-001"
+        name:
+          type: string
+          example: "CICIDS2017 Regression"
+        replay_file:
+          type: string
+          example: "replays/cicids2017.json"
+        started_at:
+          type: string
+          format: date-time
+        finished_at:
+          type: string
+          format: date-time
+        precision_val:
+          type: number
+          format: float
+          example: 0.94
+        recall_val:
+          type: number
+          format: float
+          example: 0.91
+        explanation_coverage:
+          type: number
+          format: float
+          example: 0.88
+
+    TopologyHighlight:
+      type: object
+      properties:
+        service_id:
+          type: string
+          example: "sw-edge-01"
+        label:
+          type: string
+          example: "Bandwidth"
+        status:
+          type: string
+          example: "warning"
+        value:
+          type: string
+          example: "88%"
+
+    DashboardOverviewResponse:
+      type: object
+      properties:
+        generated_at:
+          type: string
+          format: date-time
+          example: "2026-05-11T00:00:00Z"
+        summary:
+          $ref: "#/components/schemas/DashboardSummary"
+        severity_breakdown:
+          type: object
+          additionalProperties:
+            type: integer
+          example:
+            critical: 3
+            high: 5
+            medium: 4
+        command_status_breakdown:
+          type: object
+          additionalProperties:
+            type: integer
+          example:
+            pending: 3
+            executing: 2
+            completed: 885
+        recent_incidents:
+          type: array
+          items:
+            $ref: "#/components/schemas/DashboardIncident"
+        recent_commands:
+          type: array
+          items:
+            $ref: "#/components/schemas/DashboardCommand"
+        recent_decisions:
+          type: array
+          items:
+            $ref: "#/components/schemas/DashboardDecision"
+        model_metrics:
+          type: array
+          items:
+            $ref: "#/components/schemas/DashboardMetric"
+        recent_eval_runs:
+          type: array
+          items:
+            $ref: "#/components/schemas/DashboardEvalRun"
+        topology_highlights:
+          type: array
+          items:
+            $ref: "#/components/schemas/TopologyHighlight"
+        warnings:
+          type: array
+          items:
+            type: string
+          example:
+            - "sw-edge-01 is degraded (bandwidth 88%)"

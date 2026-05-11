@@ -4,6 +4,8 @@ import { SummaryCard } from "./components/dashboard/SummaryCard";
 import { useDashboardData } from "./hooks/useDashboardData";
 import { useTopologyData } from "./hooks/useTopologyData";
 import { ServiceDetailsPanel } from "./panels/ServiceDetailsPanel";
+import { NodeSearch } from "./components/dashboard/NodeSearch";
+import { ExportBar } from "./components/dashboard/ExportBar";
 
 const SceneCanvas = lazy(async () => {
   const mod = await import("./components/3d/SceneCanvas");
@@ -55,14 +57,22 @@ export function App() {
       <SectionPanel
             title="Threat Topology"
             subtitle="Live service graph backed by the new topology endpoint."
-            aside={<span className="panel-pill">{topology.nodes.length} services</span>}
+            aside={
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <span className="panel-pill">{topology.nodes.length} services</span>
+                <ExportBar nodes={topology.nodes} links={topology.links} />
+              </div>
+            }
           >
             {topology.usingMockData ? (
               <p className="topology-mock-info" role="status">Using mock data.</p>
             ) : null}
+            <div style={{ marginBottom: 12 }}>
+              <NodeSearch nodes={topology.nodes} />
+            </div>
             <div className="topology-layout">
               <div className="topology-stage">
-                <Suspense fallback={<div className="topology-loading">Loading topology workspace...</div>}>
+                <Suspense fallback={<div className="topology-loading">Loading 3D workspace...</div>}>
                   <SceneCanvas
                     nodes={topology.nodes}
                     links={topology.links}

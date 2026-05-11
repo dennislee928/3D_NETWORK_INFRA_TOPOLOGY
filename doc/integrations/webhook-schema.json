@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Axiom Topology Webhook Event",
+  "description": "JSON schema for webhook events emitted by the Axiom Topology backend. Supports alert, topology_change, and health_status event types.",
+  "oneOf": [
+    { "$ref": "#/definitions/AlertEvent" },
+    { "$ref": "#/definitions/TopologyChangeEvent" },
+    { "$ref": "#/definitions/HealthStatusEvent" }
+  ],
+  "definitions": {
+    "BaseEvent": {
+      "type": "object",
+      "required": ["event_type", "timestamp", "source"],
+      "properties": {
+        "event_type": {
+          "type": "string",
+          "enum": ["alert", "topology_change", "health_status"],
+          "description": "The type of event being emitted."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of when the event occurred."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source component that generated the event.",
+          "examples": ["axiom-rule-engine", "sdn-adapter", "health-monitor"]
+        },
+        "environment": {
+          "type": "string",
+          "description": "Deployment environment.",
+          "default": "production",
+          "examples": ["production", "staging", "development"]
+        }
+      }
+    },
+    "AlertEvent": {
+      "description": "Emitted when a rule is triggered (e.g. risk score threshold exceeded).",
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["alert_id", "rule_id", "severity", "message", "affected_node_id"],
+          "properties": {
+            "event_type": { "enum": ["alert"] },
+            "alert_id": {
+              "type": "string",
+              "description": "Unique alert identifier.",
+              "example": "alert-20260511-001"
+            },
+            "rule_id": {
+              "type": "string",
+              "description": "ID of the rule that triggered.",
+              "example": "rule-bandwidth-01"
+            },
+            "severity": {
+              "type": "string",
+              "enum": ["critical", "high", "medium", "low", "info"],
+              "description": "Alert severity level."
+            },
+            "message": {
+              "type": "string",
+              "description": "Human-readable alert message.",
+              "example": "Bandwidth utilization on sw-edge-01 exceeded 85% threshold."
+            },
+            "affected_node_id": {
+              "type": "string",
+              "description": "ID of the topology node affected.",
+              "example": "sw-edge-01"
+            },
+            "affected_node_name": {
+              "type": "string",
+              "description": "Human-readable name of the affected node.",
+              "example": "Edge Switch 01"
+            },
+            "current_value": {
+              "type": "number",
+              "description": "Current metric value that triggered the alert.",
+              "example": 0.88
+            },
+            "threshold": {
+              "type": "number",
+              "description": "Threshold value that was exceeded.",
+              "example": 0.85
+            },
+            "risk_score": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Current risk score of the affected node.",
+              "example": 0.55
+            }
+          }
+        }
+      ]
+    },
+    "TopologyChangeEvent": {
+      "description": "Emitted when the topology structure changes (node added/removed, link added/removed).",
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["change_type", "entity_type", "entity_id"],
+          "properties": {
+            "event_type": { "enum": ["topology_change"] },
+            "change_type": {
+              "type": "string",
+              "enum": ["node_added", "node_removed", "link_added", "link_removed", "node_updated", "link_updated"],
+              "description": "The type of topology change."
+            },
+            "entity_type": {
+              "type": "string",
+              "enum": ["node", "link"],
+              "description": "Type of topology entity that changed."
+            },
+            "entity_id": {
+              "type": "string",
+              "description": "ID of the entity that changed.",
+              "example": "sw-core-03"
+            },
+            "entity_name": {
+              "type": "string",
+              "description": "Name of the entity that changed.",
+              "example": "Core Switch 03"
+            },
+            "realm": {
+              "type": "string",
+              "enum": ["physical", "virtual", "service"],
+              "description": "Topology realm of the changed entity."
+            },
+            "previous_state": {
+              "type": "object",
+              "description": "Previous state of the entity (before the change)."
+            },
+            "current_state": {
+              "type": "object",
+              "description": "Current state of the entity (after the change)."
+            }
+          }
+        }
+      ]
+    },
+    "HealthStatusEvent": {
+      "description": "Emitted when a node's health status changes (e.g. healthy → degraded).",
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["node_id", "previous_status", "current_status"],
+          "properties": {
+            "event_type": { "enum": ["health_status"] },
+            "node_id": {
+              "type": "string",
+              "description": "ID of the node whose status changed.",
+              "example": "rule-engine-axiom"
+            },
+            "node_name": {
+              "type": "string",
+              "description": "Name of the node whose status changed.",
+              "example": "Axiom Rule Engine"
+            },
+            "node_type": {
+              "type": "string",
+              "description": "Type of the node.",
+              "example": "rule-engine"
+            },
+            "previous_status": {
+              "type": "string",
+              "enum": ["healthy", "degraded", "down", "unknown"],
+              "description": "Previous health status.",
+              "example": "healthy"
+            },
+            "current_status": {
+              "type": "string",
+              "enum": ["healthy", "degraded", "down", "unknown"],
+              "description": "Current health status.",
+              "example": "degraded"
+            },
+            "risk_score": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Current risk score.",
+              "example": 0.62
+            },
+            "metrics": {
+              "type": "object",
+              "description": "Current health metrics at the time of the event.",
+              "properties": {
+                "latencyMs": { "type": "number", "example": 42 },
+                "errorRate": { "type": "number", "example": 0.04 },
+                "cpuUsage": { "type": "number", "example": 0.82 },
+                "memoryUsage": { "type": "number", "example": 0.76 },
+                "bandwidthUsage": { "type": "number", "example": 0.88 }
+              }
+            },
+            "reason": {
+              "type": "string",
+              "description": "Optional reason for the status change.",
+              "example": "CPU usage exceeded 80% threshold"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

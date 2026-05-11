@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "axiom-topology.fullname" . }}-backend
+  labels:
+    {{- include "axiom-topology.labels" . | nindent 4 }}
+    app.kubernetes.io/component: backend
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "axiom-topology.backendSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "axiom-topology.backendSelectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: backend
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.backend.service.targetPort }}
+              name: http
+          env:
+            - name: PORT
+              value: {{ .Values.backend.env.PORT | quote }}
+            - name: RUST_LOG
+              value: {{ .Values.backend.env.RUST_LOG | quote }}
+            - name: SDN_TYPE
+              value: {{ .Values.backend.env.SDN_TYPE | quote }}
+            - name: RYU_URL
+              value: {{ .Values.backend.env.RYU_URL | quote }}
+            - name: ODL_URL
+              value: {{ .Values.backend.env.ODL_URL | quote }}
+            - name: ODL_USERNAME
+              value: {{ .Values.backend.env.ODL_USERNAME | quote }}
+            - name: ODL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "axiom-topology.fullname" . }}-secret
+                  key: ODL_PASSWORD
+            - name: ALLOWED_ORIGINS
+              value: {{ .Values.backend.env.ALLOWED_ORIGINS | quote }}
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
