@@ -10,8 +10,6 @@ vi.mock("./components/3d/SceneCanvas", async () => {
   };
 });
 
-const originalFetch = global.fetch;
-
 describe("App", () => {
   beforeEach(() => {
     const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
@@ -78,18 +76,17 @@ describe("App", () => {
       return { ok: false, status: 404 };
     });
 
-    global.fetch = fetchMock as unknown as typeof fetch;
+    vi.stubGlobal("fetch", fetchMock);
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
-    global.fetch = originalFetch;
   });
 
   it("renders live dashboard summary and recent incident data", async () => {
     render(<App />);
 
-    expect(screen.getByText("Loading topology workspace...")).toBeInTheDocument();
+    expect(screen.getByText("Loading 3D workspace...")).toBeInTheDocument();
     expect(await screen.findByText("Open Incidents")).toBeInTheDocument();
     expect(screen.getByText("4")).toBeInTheDocument();
     expect(screen.getByText("Suspicious credential replay")).toBeInTheDocument();
@@ -97,7 +94,7 @@ describe("App", () => {
   });
 
   it("shows a degraded-data warning when overview loading fails", async () => {
-    global.fetch = vi.fn(async (input: RequestInfo | URL) => {
+    vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL) => {
       const url = String(input);
       if (url.endsWith("/api/v1/dashboard/overview")) {
         return { ok: false, status: 503 };
@@ -109,7 +106,7 @@ describe("App", () => {
         };
       }
       return { ok: false, status: 404 };
-    }) as unknown as typeof fetch;
+    }));
 
     render(<App />);
 

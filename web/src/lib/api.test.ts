@@ -1,13 +1,9 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
-
 import { getDashboardOverview, getTopologyServices } from "./api";
-
-const originalFetch = global.fetch;
 
 describe("dashboard api client", () => {
   afterEach(() => {
     vi.restoreAllMocks();
-    global.fetch = originalFetch;
   });
 
   it("requests dashboard overview from the versioned api route", async () => {
@@ -15,13 +11,13 @@ describe("dashboard api client", () => {
       ok: true,
       json: async () => ({ summary: { total_incidents: 3 } })
     });
-    global.fetch = fetchMock as unknown as typeof fetch;
+    (globalThis as any).fetch = fetchMock;
 
     await getDashboardOverview();
 
     expect(fetchMock).toHaveBeenCalledWith(
-      "https://axiom-rule-siem-engine-0z43.onrender.com/api/v1/dashboard/overview",
-      expect.any(Object)
+      "http://localhost:4000/api/v1/dashboard/overview",
+      expect.objectContaining({ headers: expect.any(Object) })
     );
   });
 
@@ -30,7 +26,7 @@ describe("dashboard api client", () => {
       ok: false,
       status: 503
     });
-    global.fetch = fetchMock as unknown as typeof fetch;
+    (globalThis as any).fetch = fetchMock;
 
     await expect(getTopologyServices()).rejects.toThrow("HTTP 503");
   });
