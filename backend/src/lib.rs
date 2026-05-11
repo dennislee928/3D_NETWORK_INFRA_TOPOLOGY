@@ -13,6 +13,7 @@ use std::net::SocketAddr;
 use tokio::sync::broadcast;
 use tower_http::cors::CorsLayer;
 use tracing::info;
+use crate::rate_limiter::RateLimitLayer;
 
 pub fn build_app() -> Router {
     let allowed_origins = std::env::var("ALLOWED_ORIGINS")
@@ -54,8 +55,8 @@ pub fn build_app() -> Router {
         .merge(api_routes)
         .layer(Extension(tx))
         .layer(middleware::from_fn(metrics::metrics_middleware))
+        .layer(RateLimitLayer)
         .layer(cors)
-        .layer(middleware::from_fn(rate_limiter::rate_limit_middleware))
 }
 
 pub async fn start() {

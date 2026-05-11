@@ -1,10 +1,12 @@
-use axum::http::{Request, Response, StatusCode};
+use axum::extract::Request;
+use axum::http::StatusCode;
 use axum::middleware::Next;
+use axum::response::{IntoResponse, Response};
 
-pub async fn validation_middleware<B>(
-    req: Request<B>,
-    next: Next<B>,
-) -> Result<Response<B>, StatusCode> {
+pub async fn validation_middleware(
+    req: Request,
+    next: Next,
+) -> Response {
     let uri = req.uri().to_string();
     let uri_lower = uri.to_lowercase();
 
@@ -13,8 +15,8 @@ pub async fn validation_middleware<B>(
         || uri_lower.contains("~")
         || uri_lower.contains("//..")
     {
-        return Err(StatusCode::BAD_REQUEST);
+        return (StatusCode::BAD_REQUEST, "Bad Request").into_response();
     }
 
-    Ok(next.run(req).await)
+    next.run(req).await
 }

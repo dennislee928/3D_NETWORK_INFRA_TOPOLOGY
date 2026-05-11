@@ -26,7 +26,7 @@ async fn handle_socket(socket: WebSocket, tx: broadcast::Sender<String>) {
             msg = rx.recv() => {
                 match msg {
                     Ok(text) => {
-                        if socket.send(Message::Text(text)).await.is_err() {
+                        if socket.send(Message::Text(text.into())).await.is_err() {
                             break;
                         }
                     }

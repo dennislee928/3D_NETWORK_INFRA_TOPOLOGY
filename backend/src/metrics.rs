@@ -1,5 +1,6 @@
-use axum::http::{Request, Response, StatusCode};
+use axum::extract::Request;
 use axum::middleware::Next;
+use axum::response::Response;
 use std::sync::atomic::{AtomicI64, AtomicU64, Ordering};
 
 static REQUEST_COUNT: AtomicU64 = AtomicU64::new(0);
@@ -51,10 +52,10 @@ pub async fn metrics_handler() -> String {
     )
 }
 
-pub async fn metrics_middleware<B>(
-    req: Request<B>,
-    next: Next<B>,
-) -> Result<Response<B>, StatusCode> {
+pub async fn metrics_middleware(
+    req: Request,
+    next: Next,
+) -> Response {
     increment_request_count();
-    Ok(next.run(req).await)
+    next.run(req).await
 }

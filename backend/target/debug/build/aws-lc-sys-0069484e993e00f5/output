@@ -534,212 +534,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
 exit status: 0
 exit status: 0
 exit status: 0
@@ -1026,104 +820,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -1168,194 +864,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -1642,6 +1150,498 @@ exit status: 0
 exit status: 0
 exit status: 0
 exit status: 0
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
 exit status: 0
 exit status: 0
 exit status: 0
@@ -1983,42 +1983,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
 exit status: 0
 exit status: 0
 exit status: 0
@@ -2153,6 +2117,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -2171,14 +2143,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -2457,14 +2421,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -2483,6 +2439,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -2591,6 +2555,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -2627,14 +2599,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -3181,14 +3145,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -3261,6 +3217,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -3351,14 +3315,24 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -3377,6 +3351,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -3691,14 +3673,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -3717,6 +3691,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -3977,6 +3959,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4031,14 +4021,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4129,14 +4111,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4191,6 +4165,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4317,14 +4299,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4361,6 +4335,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4487,14 +4469,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4513,6 +4487,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4567,14 +4549,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4665,6 +4639,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -4781,6 +4763,42 @@ exit status: 0
 exit status: 0
 exit status: 0
 exit status: 0
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
+CC_aarch64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
+CC_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
+CFLAGS_aarch64_apple_darwin = None
+cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
+CFLAGS_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5237,24 +5255,6 @@ exit status: 0
 exit status: 0
 exit status: 0
 exit status: 0
-cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
-CC_aarch64-apple-darwin = None
-cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
-CC_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=HOST_CC
-HOST_CC = None
-cargo:rerun-if-env-changed=CC
-CC = None
-cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
-CRATE_CC_NO_DEFAULTS = None
-cargo:rerun-if-env-changed=CFLAGS
-CFLAGS = None
-cargo:rerun-if-env-changed=HOST_CFLAGS
-HOST_CFLAGS = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
-CFLAGS_aarch64_apple_darwin = None
-cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
-CFLAGS_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5291,14 +5291,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5407,6 +5399,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5497,14 +5497,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5559,6 +5551,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5595,14 +5595,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5711,6 +5703,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5819,14 +5819,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5863,6 +5855,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5935,14 +5935,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -5997,6 +5989,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6105,14 +6105,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6149,6 +6141,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6221,14 +6221,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6319,6 +6311,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6543,6 +6543,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6561,14 +6569,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6695,14 +6695,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6775,6 +6767,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6865,14 +6865,6 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
-exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin
@@ -6927,6 +6919,14 @@ cargo:rerun-if-env-changed=CFLAGS_aarch64_apple_darwin
 CFLAGS_aarch64_apple_darwin = None
 cargo:rerun-if-env-changed=CFLAGS_aarch64-apple-darwin
 CFLAGS_aarch64-apple-darwin = None
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
+exit status: 0
 cargo:rerun-if-env-changed=CC_aarch64-apple-darwin
 CC_aarch64-apple-darwin = None
 cargo:rerun-if-env-changed=CC_aarch64_apple_darwin

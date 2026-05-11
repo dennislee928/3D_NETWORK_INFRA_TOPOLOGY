@@ -1,13 +1,15 @@
-use axum::http::{Request, Response, StatusCode};
+use axum::extract::Request;
+use axum::http::StatusCode;
 use axum::middleware::Next;
+use axum::response::{IntoResponse, Response};
 
-pub async fn auth_middleware<B>(
-    req: Request<B>,
-    next: Next<B>,
-) -> Result<Response<B>, StatusCode> {
+pub async fn auth_middleware(
+    req: Request,
+    next: Next,
+) -> Response {
     let api_token = match std::env::var("API_TOKEN") {
         Ok(t) if !t.is_empty() => t,
-        _ => return Ok(next.run(req).await),
+        _ => return next.run(req).await,
     };
 
     let auth_header = req
@@ -17,8 +19,8 @@ pub async fn auth_middleware<B>(
         .unwrap_or("");
 
     if auth_header != format!("Bearer {}", api_token) {
-        return Err(StatusCode::UNAUTHORIZED);
+        return (StatusCode::UNAUTHORIZED, "Unauthorized").into_response();
     }
 
-    Ok(next.run(req).await)
+    next.run(req).await
 }
