@@ -24,29 +24,8 @@ interface RawTopologyResponse {
   links: TopologyResponse["links"];
 }
 
-// #region agent log
-function agentLog(hypothesisId: string, location: string, message: string, data: Record<string, unknown>) {
-  fetch("http://127.0.0.1:7293/ingest/66d8e5aa-62df-4dc2-b960-1a0de6597420", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Debug-Session-Id": "b61a46"
-    },
-    body: JSON.stringify({
-      sessionId: "b61a46",
-      runId: "pre-fix-fe",
-      hypothesisId,
-      location,
-      message,
-      data,
-      timestamp: Date.now()
-    })
-  }).catch(() => {});
-}
-// #endregion
-
 function baseUrl() {
-  return "https://axiom-rule-siem-engine-0z43.onrender.com";
+  return import.meta.env.VITE_SDN_ADAPTER_URL || "";
 }
 
 function apiUrl(path: string) {
@@ -56,24 +35,12 @@ function apiUrl(path: string) {
 }
 
 async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
-  agentLog("A", "web/src/lib/api.ts:fetchJson", "request_start", {
-    path,
-    url: apiUrl(path),
-    hasInit: Boolean(init)
-  });
   const response = await fetch(apiUrl(path), {
     headers: {
       Accept: "application/json",
       ...(init?.headers ?? {})
     },
     ...init
-  });
-
-  agentLog("A", "web/src/lib/api.ts:fetchJson", "response", {
-    path,
-    url: apiUrl(path),
-    ok: response.ok,
-    status: response.status
   });
 
   if (!response.ok) {
@@ -93,27 +60,11 @@ export async function getSDNTopology(): Promise<TopologyResponse> {
   const topologyUrl = adapterUrl ? `${adapterUrl}/api/v1/topology/sdn` : "/api/v1/topology/sdn";
   
   try {
-    agentLog("B", "web/src/lib/api.ts:getSDNTopology", "request_start", {
-      adapterUrl,
-      url: topologyUrl
-    });
     const response = await fetch(topologyUrl);
     if (response.ok) {
-      const json = await response.json();
-      agentLog("B", "web/src/lib/api.ts:getSDNTopology", "response_ok", {
-        status: response.status,
-        nodes: Array.isArray((json as any)?.nodes) ? (json as any).nodes.length : null,
-        links: Array.isArray((json as any)?.links) ? (json as any).links.length : null
-      });
-      return json;
+      return await response.json();
     }
-    agentLog("B", "web/src/lib/api.ts:getSDNTopology", "response_not_ok", {
-      status: response.status
-    });
   } catch (e) {
-    agentLog("B", "web/src/lib/api.ts:getSDNTopology", "fetch_failed", {
-      error: e instanceof Error ? e.message : String(e)
-    });
     console.warn("SDN Adapter not reachable, using fallback mock data.");
   }
 
@@ -185,14 +136,7 @@ export async function getSDNTopology(): Promise<TopologyResponse> {
 }
 
 export async function getTopologyServices() {
-  agentLog("A", "web/src/lib/api.ts:getTopologyServices", "request_start", {
-    url: apiUrl("/topology/services")
-  });
   const raw = await fetchJson<RawTopologyResponse>("/topology/services");
-  agentLog("A", "web/src/lib/api.ts:getTopologyServices", "response_ok", {
-    nodes: raw?.nodes?.length ?? null,
-    links: raw?.links?.length ?? null
-  });
 
   return {
     nodes: raw.nodes.map(node => ({

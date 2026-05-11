@@ -21,6 +21,12 @@ services:
         value: "10000"
       - key: RUST_LOG
         value: "info"
+      - key: ALLOWED_ORIGINS
+        value: "https://topology-frontend-3d.onrender.com"
+      - key: ODL_USERNAME
+        value: "admin"
+      - key: ODL_PASSWORD
+        value: "admin"
 
   - type: web
     name: topology-frontend-3d

@@ -5,7 +5,7 @@ use axum::{
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::net::SocketAddr;
-use tower_http::cors::{Any, CorsLayer};
+use tower_http::cors::CorsLayer;
 use tracing::info;
 
 // --- Frontend Data Models ---
@@ -154,7 +154,10 @@ async fn get_sdn_topology() -> Json<TopologyResponse> {
 
     match client
         .get(format!("{}/restconf/operational/network-topology:network-topology", odl_url))
-        .basic_auth("admin", Some("admin"))
+        .basic_auth(
+            std::env::var("ODL_USERNAME").unwrap_or_else(|_| "admin".to_string()),
+            Some(&std::env::var("ODL_PASSWORD").unwrap_or_else(|_| "admin".to_string())),
+        )
         .header("Accept", "application/json")
         .send()
         .await
@@ -238,32 +241,13 @@ fn get_mock_topology() -> TopologyResponse {
 async fn main() {
     tracing_subscriber::fmt::init();
 
-    // #region agent log
-    fn agent_log(hypothesis_id: &str, location: &str, message: &str, data: serde_json::Value) {
-        use std::io::Write;
-        let payload = serde_json::json!({
-            "sessionId": "b61a46",
-            "runId": "pre-fix",
-            "hypothesisId": hypothesis_id,
-            "location": location,
-            "message": message,
-            "data": data,
-            "timestamp": (std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap_or_default()
-                .as_millis() as u64),
-        });
-        if let Ok(mut f) = std::fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open("/Users/dennis_leedennis_lee/Documents/GitHub/3D_NETWORK_INFRA_TOPOLOGY/.cursor/debug-b61a46.log")
-        {
-            let _ = writeln!(f, "{}", payload);
-        }
-    }
-    // #endregion
-
-    let cors = CorsLayer::new().allow_origin(Any).allow_methods(Any).allow_headers(Any);
+    let allowed_origins = std::env::var("ALLOWED_ORIGINS")
+        .unwrap_or_else(|_| "http://localhost:5173,http://localhost:3000".to_string());
+    let origins: Vec<String> = allowed_origins.split(',').map(|s| s.trim().to_string()).collect();
+    let cors = CorsLayer::new()
+        .allow_origin(origins.iter().map(|s| s.parse::<axum::http::HeaderValue>().unwrap()).collect::<Vec<_>>())
+        .allow_methods([axum::http::Method::GET, axum::http::Method::POST, axum::http::Method::OPTIONS])
+        .allow_headers([axum::http::header::CONTENT_TYPE, axum::http::header::AUTHORIZATION]);
     let app = Router::new()
         .route("/", get(|| async { "SDN Adapter is running" }))
         .route("/health", get(|| async { "OK" }))
@@ -275,42 +259,15 @@ async fn main() {
         .and_then(|v| v.parse::<u16>().ok())
         .unwrap_or(4000);
     let addr = SocketAddr::from(([0, 0, 0, 0], port));
-    agent_log(
-        "B",
-        "backend/src/main.rs:main",
-        "startup",
-        serde_json::json!({
-            "cwd": std::env::current_dir().ok().map(|p| p.display().to_string()),
-            "port_env_set": std::env::var("PORT").is_ok(),
-            "port": port,
-            "addr": addr.to_string(),
-        }),
-    );
     info!("Rust SDN Adapter listening on {}", addr);
     let listener = match tokio::net::TcpListener::bind(addr).await {
         Ok(l) => l,
         Err(e) => {
-            agent_log(
-                "C",
-                "backend/src/main.rs:main",
-                "bind_failed",
-                serde_json::json!({
-                    "addr": addr.to_string(),
-                    "error_kind": format!("{:?}", e.kind()),
-                    "error": e.to_string(),
-                }),
-            );
+            tracing::error!("Failed to bind to {}: {}", addr, e);
             return;
         }
     };
     if let Err(e) = axum::serve(listener, app).await {
-        agent_log(
-            "C",
-            "backend/src/main.rs:main",
-            "serve_failed",
-            serde_json::json!({
-                "error": e.to_string(),
-            }),
-        );
+        tracing::error!("Server error: {}", e);
     }
 }

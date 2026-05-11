@@ -2,27 +2,6 @@ import { useEffect, useState } from "react";
 import { getTopologyServices, getSDNTopology } from "../lib/api";
 import type { ServiceLink, ServiceNode, TopologyResponse, TopologyRealm } from "../types/topology";
 
-// #region agent log
-function agentLog(hypothesisId: string, location: string, message: string, data: Record<string, unknown>) {
-  fetch("http://127.0.0.1:7293/ingest/66d8e5aa-62df-4dc2-b960-1a0de6597420", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Debug-Session-Id": "b61a46"
-    },
-    body: JSON.stringify({
-      sessionId: "b61a46",
-      runId: "pre-fix-fe",
-      hypothesisId,
-      location,
-      message,
-      data,
-      timestamp: Date.now()
-    })
-  }).catch(() => {});
-}
-// #endregion
-
 export interface TopologyState {
   nodes: ServiceNode[];
   links: ServiceLink[];
@@ -165,7 +144,6 @@ export function useTopologyData(): TopologyState {
     async function load() {
       try {
         setState(prev => ({ ...prev, loading: true, error: null, usingMockData: false }));
-        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "load_start", {});
         
         // Start both fetches, but do NOT let a slow/unreachable Service topology block rendering SDN.
         const sdnPromise = getSDNTopology();
@@ -178,11 +156,6 @@ export function useTopologyData(): TopologyState {
 
         const sdnTopology = await sdnPromise;
         if (controller.signal.aborted) return;
-
-        agentLog("B", "web/src/hooks/useTopologyData.ts:load", "sdn_ready", {
-          sdnNodes: sdnTopology?.nodes?.length ?? null,
-          sdnLinks: sdnTopology?.links?.length ?? null
-        });
 
         // Render immediately with SDN + fallback services so the canvas is not blank.
         const baseNodes = FALLBACK_TOPOLOGY.nodes;
@@ -215,19 +188,6 @@ export function useTopologyData(): TopologyState {
           { id: "cross-layer-1", from: "edge-gateway", to: "ovs-virt-01", kind: "logical", realm: "virtual" } as ServiceLink
         ];
 
-        agentLog("C", "web/src/hooks/useTopologyData.ts:load", "load_processed", {
-          allNodes: initialNodes.length,
-          allLinks: initialLinks.length,
-          realmCounts: initialNodes.reduce(
-            (acc, n) => {
-              const r = (((n as any)?.realm as string | undefined) || "service") as string;
-              acc[r] = (acc[r] ?? 0) + 1;
-              return acc;
-            },
-            {} as Record<string, number>
-          )
-        });
-
         setState({
           nodes: initialNodes,
           links: initialLinks,
@@ -241,17 +201,10 @@ export function useTopologyData(): TopologyState {
         if (controller.signal.aborted) return;
 
         if (!serviceResult.ok) {
-          agentLog("A", "web/src/hooks/useTopologyData.ts:load", "service_failed_non_blocking", {
-            error: serviceResult.error
-          });
           return;
         }
 
         const serviceTopology = serviceResult.value;
-        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "service_ready", {
-          serviceNodes: serviceTopology?.nodes?.length ?? null,
-          serviceLinks: serviceTopology?.links?.length ?? null
-        });
 
         const serviceNodes =
           serviceTopology.nodes?.length ? serviceTopology.nodes : FALLBACK_TOPOLOGY.nodes;
@@ -273,11 +226,6 @@ export function useTopologyData(): TopologyState {
           { id: "cross-layer-1", from: "edge-gateway", to: "ovs-virt-01", kind: "logical", realm: "virtual" } as ServiceLink
         ];
 
-        agentLog("C", "web/src/hooks/useTopologyData.ts:load", "merged_ready", {
-          allNodes: mergedNodes.length,
-          allLinks: mergedLinks.length
-        });
-
         setState({
           nodes: mergedNodes,
           links: mergedLinks,
@@ -288,7 +236,6 @@ export function useTopologyData(): TopologyState {
       } catch (error) {
         if (controller.signal.aborted) return;
         const message = error instanceof Error ? error.message : String(error);
-        agentLog("A", "web/src/hooks/useTopologyData.ts:load", "load_failed", { error: message });
         
         // Even on error, we try to show something (SDN + Fallback)
         const sdn = await getSDNTopology().catch(() => ({ nodes: [], links: [] }));
