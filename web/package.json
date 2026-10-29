@@ -38,6 +38,7 @@
     "picomatch": "^4.0.4",
     "ws": "^8.21.0",
     "source-map-js": "^1.2.2",
-    "@vitest/mocker": "^4.1.12"
+    "@vitest/mocker": "^4.1.12",
+    "fflate": "^0.8.3"
   }
 }
